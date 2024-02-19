@@ -7,31 +7,43 @@ import Products from "../components/Products";
 import Gallery from "../components/Gallery";
 import BestGear from "../components/BestGear";
 import { Link } from "react-router-dom";
+import { Center,Image } from "@chakra-ui/react";
 
 const Home = ({ data, handleButtonClick}) => {
   // const products = data || [];
+
+
   
   const productName = "XX99 Mark II Headphones";
   return (
     <>
       <div className="text-white ">
-        <div>
-          <img
-            src="/resources/assets/home/desktop/image-header.jpg"
-            srcSet="
-            /resources/assets/home/mobile/image-header.jpg 640w,
-            /resources/assets/home/tablet/image-header.jpg 780w,
-            /resources/assets/home/desktop/image-hero.jpg 1024w
+      {/* <div className="text-white bg-contain w-screen h-full bg-no-repeat bg-center md:bg-right md:bg-bottom"  style={{backgroundImage: "url('/resources/assets/home/desktop/image-hero.jpg')", height: "40rem", '@media (max-width: 640px)': { backgroundImage: "url('/resources/assets/home/mobile/image-header.jpg')" }, '@media (min-width: 641px) and (max-width: 768px)': { backgroundImage: "url('/resources/assets/home/tablet/image-header.jpg')" }}}>
+
+</div>  */}
+ 
+  <Center>
+  <Image
+  
+    srcSet="
+    /resources/assets/home/mobile/img1.jpg 640w,
+    /resources/assets/home/tablet/image-header.jpg 780w,
+    /resources/assets/home/desktop/image-hero.jpg 1024w
     "
-            sizes="(max-width: 640px) 100vw,
-           (max-width: 768px) 100vw,
-            1024px
-           "
-            alt="Hero Image"
-            className="w-screen h-[40rem] 2xl:h-[80rem] object-center object-cover md:object-right-bottom lg:object-bottom "
-          />
-        </div>
-        <div className="text-center mx-28 absolute top-[15rem] md:w-64  md:top-[16rem] md:left-[8rem] lg:text-left lg:w-[379px] lg:h-[400px]  lg:top-[20rem] lg:left-[.5rem]  xl:left-[5rem] 2xl:left-[25rem] 2xl:top-[35rem]">
+    sizes="(max-width: 640px) 100vw,
+    (max-width: 768px) 100vw,
+    1024px
+    "
+    src="/resources/assets/home/desktop/image-header.jpg"
+    alt="Hero Image"
+    className="w-full h-[40rem] 2xl:h-[80rem] object-cover md:object-right-bottom lg:object-bottom "
+  />
+</Center> 
+
+         
+       
+
+         <div className="mx-28 absolute top-[15rem] md:w-64  md:top-[16rem] md:left-[8rem] lg:text-left lg:w-[379px] lg:h-[400px]  lg:top-[20rem] lg:left-[.5rem]  xl:left-[5rem] 2xl:left-[25rem] 2xl:top-[35rem]">
           <small className="lg:tracking-widest lg:text-sm text-xl 2xl:text-2xl font-thin">
             NEW PRODUCT
           </small>
@@ -51,7 +63,7 @@ const Home = ({ data, handleButtonClick}) => {
             See Product
           </Button>
         </Link>
-      </div>
+      </div> 
 
       <div className="flex bg-top-4 text-black min-h-80 md:min-h-60 xl:min-h-80 2xl:mb-32">
         <Products data={data}/>

@@ -44,56 +44,53 @@ const Gallery = ({handleButtonClick,data}) => {
   return (
     <>
     <div className="min-h-screen">
+   <div className="relative my-8 mx-8 border bg-orange md:mx-20 lg:mx-[9rem] xl:mx-[15rem]">
+  {/* Background pattern */}
+  <div
+    className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover"
+    style={{ backgroundImage: "url('/resources/assets/home/desktop/pattern-circles.svg')" }}
+  ></div>
+
+  {/* Content */}
+  {speakerZX9Data.map((speaker) => (
     <div
-        className="bg-orange my-8 mx-8 border md:mx-20 lg:mx-[9rem] xl:mx-[] 2xl:mx-[15rem] 2xl:relative 2xl:left-20"
-        style={{
-          backgroundImage:
-            'url("../../resources/assets/home/mobile/pattern-circles.svg")',
-        }}
-      >
-        {speakerZX9Data.map((speaker) => (
-          <div
-            key={speaker.id}
-            className="items-center py-10 flex flex-col  lg:flex-row md:items-center lg:items-center lg:justify-center lg:gap-20 lg:px-10  "
-          >
-            {/* Speaker  ZX9 image */}
-            <div className=" h-full">
-              <img
-                 
-                  src={ window.innerWidth < 480
-                    ? speaker.mobileImage
-                    :window.innerWidth < 800
-                    ? speaker.tabletImage 
-                    : speaker.image}
-                  alt={speaker.name}
-                  className="mb-5 w-40 md:w-64  2xl:w-80"
-               
-              />
-            </div>
-
-            {/* text content */}
-            <div className="text-white text-center lg:text-start">
-              <div className="">
-                <div className="text-[36px] font-bold tracking-[1.3px] leading-9 mb-5 md:text-[56px] md:leading-[1em] md:font-bold md:mb-5 lg:tracking-[2px]">
-                  <div className="w-40 ml-16 lg:w-60">{speaker.slug}</div>
-                  
-                </div>
-                <div className=" text-[15px] mb-8 px-3  w-72 md:mb-8  lg:px-10 lg:ml-6 ">
-                  Upgrade to premium speakers that are phenomenally built to
-                  deliver truely remarkable <br className="hidden" /> sound
-                </div>
-              </div>
-              {/* product button */}
-
-              <Link to={`/product/${speaker.slug}`}>
-                <Button className="bg-black px-6 py-3 font-bold lg:hover:bg-lightgray  lg:ml-16"  onClick={() => handleButtonClick(speaker.slug)}>
-                  SEE PRODUCT
-                </Button>
-              </Link>
-            </div>
-          </div>
-        ))}
+      key={speaker.id}
+      className="items-center py-10 flex flex-col lg:flex-row md:items-center lg:items-center lg:justify-center lg:gap-20 lg:px-10"
+    >
+      {/* Speaker Image */}
+      <div className="h-full">
+        <img
+          src={
+            window.innerWidth < 480
+              ? speaker.mobileImage
+              : window.innerWidth < 800
+              ? speaker.tabletImage
+              : speaker.image
+          }
+          alt={speaker.name}
+          className="mb-5 w-40 md:w-64 2xl:w-80"
+        />
       </div>
+
+      {/* Text content */}
+      <div className="text-white text-center lg:text-start">
+        <div className="text-[36px] font-bold tracking-[1.3px] leading-9 mb-5 md:text-[56px] md:leading-[1em] md:font-bold md:mb-5 lg:tracking-[2px]">
+          <div className="w-40 ml-16 lg:w-60">{speaker.slug}</div>
+        </div>
+        <div className="text-[15px] mb-8 px-3 w-72 md:mb-8 lg:px-10 lg:ml-6">
+          Upgrade to premium speakers that are phenomenally built to deliver truly remarkable <br className="hidden" /> sound
+        </div>
+        {/* Product button */}
+        <Link to={`/product/${speaker.slug}`}>
+          <Button className="bg-black px-6 py-3 font-bold lg:hover:bg-lightgray lg:ml-16" onClick={() => handleButtonClick(speaker.slug)}>
+            SEE PRODUCT
+          </Button>
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
+
        <div className="my-8 mx-8  md:mx-20 lg:mx-[6.5rem]   lg:my-0 ">
         {speakerZX7Data.map((speaker) => (
           <div
