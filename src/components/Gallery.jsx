@@ -24,9 +24,9 @@ const Gallery = ({handleButtonClick,data}) => {
       id: 2,
       slug: "ZX7 Speaker",
       category: "SPEAKER",
-      image: "../../resources/assets/home/desktop/image-speaker-zx7.jpg",
-      mobileImage:"../../resources/assets/home/mobile/image-speaker-zx7.jpg",
-      tabletImage:"../../resources/assets/home/tablet/image-speaker-zx7.jpg",
+      image: "/resources/assets/home/desktop/image-speaker-zx7.jpg",
+      mobileImage:"/resources/assets/home/mobile/image-speaker-zx7.jpg",
+      tabletImage:"/resources/assets/home/tablet/image-speaker-zx7.jpg",
     },
   ];
 
@@ -35,9 +35,9 @@ const Gallery = ({handleButtonClick,data}) => {
       id: 1,
       slug: "YX1 Wireless Earphones",
       category: "EARPHONES",
-      image: "../../resources/assets/home/desktop/image-earphones-yx1.jpg",
-      mobileImage:"../../resources/assets/home/mobile/image-earphones-yx1.jpg",
-      tabletImage:"../../resources/assets/home/tablet/image-earphones-yx1.jpg",
+      image: "/resources/assets/home/desktop/image-earphones-yx1.jpg",
+      mobileImage:"/resources/assets/home/mobile/image-earphones-yx1.jpg",
+      tabletImage:"/resources/assets/home/tablet/image-earphones-yx1.jpg",
     },
   ];
 
