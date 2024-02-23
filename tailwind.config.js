@@ -15,12 +15,12 @@ export default {
         'sans': ['Manrope', 'sans-serif'],
       },
       backgroundImage: {
-        'desktop-image-hero': 'url(../../resources/assets/home/desktop/image-hero.jpg)',
-        'tablet-image-header': 'url(../../resources/assets/home/tablet/image-header.jpg)',
-        'mobile-image-header': 'url(../../resources/assets/home/mobile/image-header.jpg)',
-        'desktop-speakerPattern':'url(../../resources/assets/home/desktop/pattern-circles.svg)',
-        'tablet-speakerPattern':'url(../../resources/assets/home/tablet/pattern-circles.svg)',
-        'mobile-speakerPattern':'url(../../resources/assets/home/mobile/pattern-circles.svg)',
+        'desktop-image-hero': 'url(/resources/assets/home/desktop/image-hero.jpg)',
+        'tablet-image-header': 'url(/resources/assets/home/tablet/image-header.jpg)',
+        'mobile-image-header': 'url(/resources/assets/home/mobile/image-header.jpg)',
+        'desktop-speakerPattern':'url(/resources/assets/home/desktop/pattern-circles.svg)',
+        'tablet-speakerPattern':'url(/resources/assets/home/tablet/pattern-circles.svg)',
+        'mobilespeakerPattern':'url(/resources/assets/home/mobile/pattern-circles.svg)',
       }, 
       colors: {
         orange: '#D87D4A',

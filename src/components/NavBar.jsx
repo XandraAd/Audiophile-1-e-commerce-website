@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo } from "react";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
+  
+  Center,
   Flex,
   Text,
   Box,
@@ -20,88 +22,92 @@ import {
   ModalHeader,
   ModalFooter,
   ModalOverlay,
- 
+  Stack
 } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import Products from "./Products";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import CartItem from "./CartItem";
+import { removeAllItems } from "../slices/CartSlices";
 
-
-
-const NavBar = ({data,item }) => {
+const NavBar = ({ data }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const placement = useBreakpointValue({ base: "right", md: "top" });
   const location = useLocation();
-  const [open, setOpen] = useState(false);
+  const dispatch=useDispatch();
+  // const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemQuantity, setItemQuantity] = useState(0);
 
- 
-
-   // Retrieve cart state from the Redux store
-  //  const cartState = useSelector((state) => state.carts);
-
-   // Access the count property from the cart state
-  //  count= {item.quantity}
- 
-  const cartCount = useSelector((state) =>
-  state.carts.cartItems.reduce((acc, item) => acc + item.quantity, 0)
-);
- 
-
-useEffect(() => {
-  // Update displayed cart count when count changes
-  setItemQuantity(prevQuantity => prevQuantity + cartCount);
-}, [cartCount,setItemQuantity]);
-
-
   
 
-   // Retrieve cart items from the Redux state
-const cartItems = useSelector((state) => state.carts.cartItems);
+  const cartCount = useSelector((state) =>
+    state.carts.cartItems.reduce((acc, item) => acc + item.quantity, 0)
+  );
 
- // Extract unique categories, including Home if not present
- const uniqueCategories = useMemo(() => {
-  try {
-    return ["Home",...new Set(data?.map((item) => item.category)) ];
-  } catch (error) {
-    console.error("Error extracting unique categories:", error);
-    return []; // Return empty array to avoid rendering errors
-  }
-}, [data]);
+  useEffect(() => {
+    // Update displayed cart count when count changes
+    setItemQuantity((prevQuantity) => prevQuantity + cartCount);
+  }, [cartCount, setItemQuantity]);
 
-// Define initial state for activeTab, assuming 'Home' if no match
-const [activeTab, setActiveTab] = useState(() => {
-  const currentTab = data?.find((tab) => location.pathname.includes(tab.category.toLowerCase()));
-  return currentTab ? currentTab.category : "Home";
-});
+  // Retrieve cart items from the Redux state
+  const cartItems = useSelector((state) => state.carts.cartItems);
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
-const toggleMenu = () => {
-  setIsDrawerOpen(!isDrawerOpen);
-}; 
+  // Format total price with commas
+  const formattedTotalPrice = totalPrice.toLocaleString();
 
-const handleTabChange = (category) => {
-  setActiveTab(category);
-};
+  // Extract unique categories, including Home if not present
+  const uniqueCategories = useMemo(() => {
+    try {
+      return ["Home", ...new Set(data?.map((item) => item.category))];
+    } catch (error) {
+      console.error("Error extracting unique categories:", error);
+      return []; 
+    }
+  }, [data]);
 
- const showModal = () => {
+  // Define initial state for activeTab, assuming 'Home' if no match
+  const [activeTab, setActiveTab] = useState(() => {
+    const currentTab = data?.find((tab) =>
+      location.pathname.includes(tab.category.toLowerCase())
+    );
+    return currentTab ? currentTab.category : "Home";
+  });
+
+  const toggleMenu = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const handleTabChange = (category) => {
+    setActiveTab(category);
+  };
+
+  const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const handleRemoveAll = ()=> {
+    dispatch(removeAllItems())
+
+  }
+
   // Check if window width is greater than or equal to 1024px (example for desktop)
   const isDesktop = useBreakpointValue({ base: false, lg: true });
 
   return (
     <>
-      <nav className="flex bg-navbgColor py-4 text-white max-w-screen  xl:justify-center">
-        {/* </nav><div className="flex justify-between items-center"> */}
-        <Flex>
+      <nav className="flex bg-navbgColor py-4 text-white max-w-screen xl:place-content-between 2xl:py-8 ">
+        <Flex className="md:mx-[6rem]  lg:mx-14  xl:mx-[12rem] 2xl:mx-[30rem]">
           <Box>
             {/* Mobile menu button*/}
             <IconButton
@@ -120,18 +126,23 @@ const handleTabChange = (category) => {
               <img
                 src="../../resources/assets/shared/desktop/logo.svg"
                 alt="company logo"
-                className=" ml-4 mr-40 md:mr-[30rem] lg:ml-[7rem] lg:mt-4  xl:ml-2  xl:mr-0 2xl:mr-[22rem]"
+              
+                className=" ml-4 mr-40 md:mr-[30rem] lg:ml-[6.5rem] lg:mt-4  xl:ml-2  xl:mr-0 xl2:mr-32 xl2:ml-8  2xl:mr-[22rem] 2xl-w-32 "
+                
               />
             </Link>
           </Box>
           {/* Navigation Links */}
           {isDesktop && (
             <Box>
-              <Box as="div" className={`lg:mx-60 xl:mx-40  xl2:mx-60`}>
+              <Box
+                as="div"
+                className={` lg:absolute  lg:left-[23rem] lg:mt-4  xl:left-[34rem] xl2:mx-6 2xl:text-[30px] 2xl:left-[60rem] `}
+              >
                 <Box
                   as="div"
                   className={` lg:flex lg:flex-row ${
-                    isDrawerOpen ? "" : "flex-col "
+                    isDrawerOpen ? "flex-row" : "flex-col "
                   } ${isDrawerOpen ? "sm:hidden lg:flex " : " hidden sm:flex"}`}
                 >
                   {uniqueCategories.map((category) => (
@@ -140,16 +151,17 @@ const handleTabChange = (category) => {
                       as="h2"
                       cursor="pointer"
                       className={`lg:px-2 ${
-                        activeTab === category? "text-orange" : " text-white"
+                        activeTab === category ? "text-orange" : " text-white"
                       }`}
                       onClick={() => handleTabChange(category)}
                     >
-                     
-                     {category === "Home" ? (
-  <Link to="/">Home</Link>
-) : (
-  <Link to={`/category/${category.toLowerCase()}`}>{category}</Link>
-)}
+                      {category === "Home" ? (
+                        <Link to="/" className="text-md uppercase">Home</Link>
+                      ) : (
+                        <Link to={`/category/${category.toLowerCase()}`} className="text-md uppercase">
+                          {category}
+                        </Link>
+                      )}
                     </Box>
                   ))}
                 </Box>
@@ -161,52 +173,78 @@ const handleTabChange = (category) => {
               ml={56}
               text="white"
               style={{ width: "40px", height: "20px" }}
-              className="lg:mr-3"
+              className="md:ml-2 2xl:ml-20 lg:ml-10 xl:relative xl:left-[40rem] xl:px-2 xl2:justify-baseline"
               onClick={showModal}
-             
-              />
+            />
 
-<span className="relative -top-9 left-6 text-orange">{cartCount !== 0 ? cartCount : null}</span>
+            <span className="relative -top-9 left-6 text-orange ">
+              {cartCount !== 0 ? cartCount : null}
+            </span>
           </Box>
         </Flex>
       </nav>
+      <Box className="divider"></Box>
       <Drawer
         placement={placement}
-       onClose={() => setIsDrawerOpen(false)}
+        onClose={() => setIsDrawerOpen(false)}
         isOpen={isDrawerOpen}
+       
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Navigation</DrawerHeader>
           <DrawerCloseButton />
-          <DrawerBody >
-          <Products data={data}/>
-        
+          <DrawerBody>
+            <Center><Products data={data} /></Center>
+         
           </DrawerBody>
         </DrawerContent>
       </Drawer>
       <Box>
-          <Modal isOpen={isModalOpen} onClose={handleCloseModal} className="w-[2rem]">
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>
-                <Text>Cart({cartCount})</Text>
-                <Text>Remove all</Text>
-              </ModalHeader>
-              <ModalBody>
-  {console.log("Cart Items in navbar:", cartItems)}
-  {/* Map over the cart items and render a CartItem for each item */}
-  {cartItems?.map((item, id) => (
-    <CartItem key={id} product={item} quantity={item.quantity} />
-  ))}
-</ModalBody>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          width="200px"
+          padding={4}
+          marginInline="0"
+         
+        >
+          <ModalOverlay />
+          <ModalContent  maxH="600px" maxW="90%">
+            <ModalHeader>
+              <Stack flexDir="row"className="flex
+              justify-between">
+                <Text className="uppercase">Cart({cartCount})</Text>
+              <small className="text-slate-400 underline" onClick={handleRemoveAll}>Remove all</small>
+              </Stack>
+              
+            </ModalHeader>
+            <ModalBody padding={3} margin={0}>
+              {console.log("Cart Items in navbar:", cartItems)}
+              {/* Map over the cart items and render a CartItem for each item */}
+              {cartItems?.map((item, id) => (
+                <CartItem key={id} product={item} quantity={item.quantity} />
+              ))}
+               <Stack flexDir="row"  justifyContent="space-between">   
+        <Text className="ml-4 uppercase text-slate-400">Total</Text> 
+        <Text as="b" className="mr-6">${formattedTotalPrice} </Text>
+        </Stack>
+            </ModalBody>
 
-              <ModalFooter>
-                <Link to="/checkout" onClick={handleCloseModal}>Checkout</Link>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-        </Box>
+            <ModalFooter padding={3} margin={0}>
+           
+       
+          <Link to="/checkout" onClick={handleCloseModal}>
+          <Center  className="w-80 mr-4 ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider">
+                Checkout
+                </Center>
+              </Link>
+              
+              
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
     </>
   );
 };

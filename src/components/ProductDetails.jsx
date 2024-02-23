@@ -2,41 +2,31 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Box,
-  Center,
-  Stack,
-  Text,
-  Flex,
-  Image,
-  Link,
- 
-} from "@chakra-ui/react";
+import { Box, Center, Stack, Text, Flex, Image, Link } from "@chakra-ui/react";
 import Button from "./Button";
 import { GrFormAdd } from "react-icons/gr";
 import { RxMinus } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { increaseCart, decreaseCart, addToCart,resetCartCount } from "../slices/CartSlices";
+import {
+  increaseCart,
+  decreaseCart,
+  addToCart,
+  resetCartCount,
+} from "../slices/CartSlices";
 import Products from "./Products";
 import BestGear from "./BestGear";
 
-
-const ProductDetailsPage = ({ product, handleButtonClick}) => {
+const ProductDetailsPage = ({ product, handleButtonClick }) => {
   const [selected, setSelected] = useState(null);
- 
-
-
-  const { productName, categoryName, slug, name } = useParams();
+  const { productName,slug, name } = useParams();
   const dispatch = useDispatch();
- const cartCount = useSelector((state) => state.carts?.count ?? 0);
-
-
-  
+  const navigate = useNavigate();
+  const cartCount = useSelector((state) => state.carts?.count ?? 0);
 
   useEffect(() => {
     // Reset count when component unmounts
     return () => {
-      dispatch(resetCartCount()); // Assuming resetCount action is available
+      dispatch(resetCartCount()); 
     };
   }, [dispatch]);
 
@@ -46,7 +36,7 @@ const ProductDetailsPage = ({ product, handleButtonClick}) => {
       ? product?.find((p) => p.name === productName)
       : product?.find((p) => p.slug === slug);
     setSelected(selectedProduct);
-    console.log(`selected in details `, selectedProduct);
+    // console.log(`selected in details `, selectedProduct);
   }, [product, productName, slug]);
 
   // Check if the selected product exists
@@ -66,36 +56,35 @@ const ProductDetailsPage = ({ product, handleButtonClick}) => {
   } = selected;
 
   // Destructure gallery images
- const { first, second, third } = gallery || [];
+  const { first, second, third } = gallery || [];
 
- const handleDecrease = () => {
+  const handleDecrease = () => {
     dispatch(decreaseCart());
-    // Update local count after dispatching
+    
   };
   const handleIncrease = () => {
     dispatch(increaseCart());
     // dispatch(addToCart(selected));
-    };
+  };
 
-  
   const handleAddtoCart = () => {
     if (selected) {
-       const quantity = cartCount; 
-      dispatch(addToCart({ item: selected, quantity,image: selected.image}));
+      const quantity = cartCount;
+      dispatch(addToCart({ item: selected, quantity, image: selected.image }));
     }
   };
-  
 
+  const handleGoBack = () => {
+    navigate(-1); 
+  };
 
   return (
     <>
       <Box className="">
-      
-
         <Box>
-          <Link to={`/category/${categoryName}`}>
-            <Button> Go back</Button>
-          </Link>
+       
+            <Button className="capitalize p-2 ring-2 ring-slate-300" onClick={handleGoBack}> Go back</Button>
+          
         </Box>
 
         <Box
@@ -164,7 +153,7 @@ const ProductDetailsPage = ({ product, handleButtonClick}) => {
                               textTransform: "uppercase",
                             }}
                           >
-                            ${price}
+                            ${price.toLocaleString()}
                           </Text>
                         </Box>
                       </Box>
@@ -312,10 +301,8 @@ const ProductDetailsPage = ({ product, handleButtonClick}) => {
                         {name}
                       </Text>
                       <Box marginLeft={32}>
-                        <Link
-                          onClick={() =>
-                            handleButtonClick("seeProduct", slug, productName)
-                          }
+                      <Link to={`/product/${item.slug}`}
+                        onClick={() => handleButtonClick(slug)}
                         >
                           <Button className="bg-orange py-2 px-2 text-white mb-[1rem]">
                             See Product

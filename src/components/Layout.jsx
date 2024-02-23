@@ -19,7 +19,7 @@ const Layout = ({children,data,handleTabChange ,cartItems}) => {
     <div>
         <NavBar  categoryTab={categoryTab} data={data}    cartItems={cartItems} />
         <main>{children}</main>
-        <Footer handleTabChange={handleTabChange} />
+        <Footer handleTabChange={handleTabChange} data={data} />
         </div>
   )
 }

@@ -5,7 +5,10 @@ const initialState = {
   shippingAddress: [],
   count: 0,
   price: 0,
+
 };
+
+
 
 const cartSlice = createSlice({
   name: "cart",
@@ -50,12 +53,12 @@ const cartSlice = createSlice({
     
     
 
-    editCart: (state, action) => {
-      const { id, updatedItem } = action.payload;
-      state.cartItems = state.cartItems.map((cartItem) =>
-        cartItem.id === id ? updatedItem : cartItem
-      );
-    },
+    // editCart: (state, action) => {
+    //   const { id, updatedItem } = action.payload;
+    //   state.cartItems = state.cartItems.map((cartItem) =>
+    //     cartItem.id === id ? updatedItem : cartItem
+    //   );
+    // },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
         (cartItem) => cartItem._id !== action.payload
@@ -74,11 +77,13 @@ const cartSlice = createSlice({
     resetCartCount: (state) => {
       state.count = 0;
     },
-    // If you intend to use price manipulation, handle it here
-    increasePrice: (state, action) => {
-      state.price = action.payload;
-    },
+   
     clearCartItems: (state) => {
+      state.cartItems = [];
+      localStorage.removeItem("cart"); // Remove item from local storage
+      state.count = 0; // Reset count when clearing cart items
+    },
+    removeAllItems: (state) => {
       state.cartItems = [];
       localStorage.removeItem("cart"); // Remove item from local storage
       state.count = 0; // Reset count when clearing cart items
@@ -88,13 +93,15 @@ const cartSlice = createSlice({
 
 export const {
   addToCart,
-  editCart,
+  
   removeFromCart,
   increaseCart,
   decreaseCart,
-  increasePrice,
+  
   clearCartItems,
-  resetCartCount,reduceCart
+  resetCartCount,
+  reduceCart,
+  removeAllItems
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

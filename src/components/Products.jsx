@@ -18,19 +18,19 @@ const Products = ({ data }) => {
   return (
     <>
       <div
-        className="grid grid-cols-1 w-screen px-8 py-4 min-h-screen md:w-[43rem] md:grid-cols-3 md:min-h-[14rem] lg:w-[50rem] lg:py-0 lg:py-0 xl:w-[65rem] xl2:w-[77rem] 2xl:w-[125rem]"
+        className="grid grid-cols-1 w-screen px-8 py-4 min-h-screen gap-2 md:w-[43rem] md:grid-cols-3 md:min-h-[14rem] lg:w-[50rem] lg:py-0 lg:py-0 xl:w-[65rem]  xl2:w-[65rem]   xl2:relative xl2:left-20 2xl:left-8 2xl:w-[100rem]"
       >
         {/* Map over the unique category names */}
         {[...uniqueCategories].map((category, index) => {
           const categoryData = categoriesData?.find((item) => item.id === index + 1); 
 
           return (
-            <div key={index} className="relative grid grid-columns-1 content-between justify-normal text-center lg:mb-[15rem]">
+            <div key={index} className="relative grid grid-columns-1 content-between justify-normal text-center lg:mb-[15rem] 2xl:relative 2xl:left-64">
               <div className="lg:w-80 xl:w-96">
                 <img
                   src={categoryData?.src}
                   alt="category image"
-                  className="relative top-10 z-50 gap-0 h-[150px] w-full object-contain md:left-[2rem] md:h-[100px] md:top-8 lg:h-[120px] lg:left-[4rem] lg:top-10 xl:h-[150px] xl:left-[5rem] xl:top-6  xl2:left-[8rem] xl2:h-[180px] 2xl:h-[280px] 2xl:left-[18rem]"
+                  className="relative top-10 z-50 gap-0 h-[150px] w-full object-contain md:left-[3rem] md:h-[100px] md:top-2 lg:h-[120px] lg:left-[4rem] lg:top-10 xl:h-[150px] xl:left-[5rem] xl:top-6 xl2:left-[8rem] xl2:h-[180px] 2xl:h-[280px] 2xl:left-[14rem]"
                 />
 
                 {/* Render category name and shop link */}

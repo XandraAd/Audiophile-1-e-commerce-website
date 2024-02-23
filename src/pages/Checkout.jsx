@@ -1,180 +1,356 @@
 /* eslint-disable no-unused-vars */
-import React, { useState} from 'react';
+import React, { useState } from "react";
 import {
+  Center,
   Box,
   Text,
   FormControl,
   FormLabel,
   Input,
-  FormErrorMessage,
-
   RadioGroup,
   Radio,
   Stack,
-
-
- 
-} from '@chakra-ui/react';
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+  Image,
+  Divider
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import CartItem from '../components/CartItem';
-import { PaystackButton } from 'react-paystack'
-
-
-
+import CartItem from "../components/CartItem";
+import Button from "../components/Button"; // Import your custom Button component
+import GoBackBtn from "../components/GoBackBtn";
+import SummaryCart from "../components/SummaryCart";
 
 
 const Checkout = () => {
-    // const [open, setOpen] = useState(false);
-// const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    zipCode: '',
-    city: '',
-    country: '',
-    paymentMethod: 'e-money'
+    name: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    zipCode: "",
+    city: "",
+    country: "",
+    paymentMethod: "e-money",
   });
-  const publicKey = import.meta.env.VITE_API_KEY;
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const cartItems = useSelector((state) => state.carts.cartItems);
-  console.log(cartItems)
-  const subTotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0) * 100; 
-
-  const buttonProps = {
-    
-    amount: subTotal,
-    currency:"GHS",
-    metadata: {
-        formData
-    },
-    publicKey,
-    text: "Pay Now",
-  
-    onSuccess: () => alert('Payment successful!'),
-    onClose: () => alert('Payment closed.'),
-  }
-
-  const [emailError, setEmailError] = useState(false);
+  const [selectedItem] = useState(cartItems[0]); // Selecting the first item in the cart
 
   const handleInputChange = (e) => {
     if (e && e.target) {
       const { name, value } = e.target;
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         [name]: value,
-      });
+      }));
     }
   };
 
-
- 
+  const handleContinueAndPay = () => {
+    setIsModalOpen(true); // Open the modal when "Continue and Pay" is clicked
+  };
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
   
-  
+   // Format total price with commas
+   const formattedTotalPrice = totalPrice.toLocaleString();
 
-  const validateEmail = () => {
-    setEmailError(formData.email.trim() === '');
+  const shipping =parseInt(50)
+  const vat =parseInt(1079)
+  const formattedVat=vat.toLocaleString();
+  const grandTotal=totalPrice+shipping+vat
+
+  const getUniqueProducts = (cartItems) => {
+    const uniqueProducts = [];
+    const productIds = new Set();
+  
+    cartItems.forEach((item) => {
+      if (!productIds.has(item.id)) {
+        productIds.add(item.id);
+        uniqueProducts.push(item);
+      }
+    });
+  
+    return uniqueProducts;
   };
 
   return (
-    <Box className='m-10'>
-      <Box className='mb-4'>
-        <Text >Go Back</Text>
+    <Box mb={48} className="m-10">
+      <Box className="mb-4">
+        <GoBackBtn />
       </Box>
       <Box>
-        <Box className='uppercase font-bold text-xl mb-10'>Checkout</Box>
+        <Box className="uppercase font-bold text-xl mb-10">Checkout</Box>
         <Box>
-          <Text className='uppercase font-bold text-orange text-xs mb-2'>Billing Address</Text>
+          <Text className="uppercase font-bold text-orange text-xs mb-2">
+            Billing Address
+          </Text>
           <FormControl mb={2}>
-            <FormLabel  fontSize="sm" fontWeight="bold">Name</FormLabel>
-            <Input name='name' value={formData.name} onChange={handleInputChange} />
+            <FormLabel htmlFor="name" fontSize="sm" fontWeight="bold">
+              Name
+            </FormLabel>
+            <Input
+              name="name"
+              type="text"
+              id="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
           </FormControl>
 
-          <FormControl isInvalid={emailError} mb={2}>
-            <FormLabel  fontSize="sm" fontWeight="bold">Email Address</FormLabel>
-            <Input name='email' type='email' value={formData.email} onChange={handleInputChange} onBlur={validateEmail} />
-            
-            <FormErrorMessage>{emailError && 'Email is required.'}</FormErrorMessage>
+          <FormControl mb={2}>
+            <FormLabel htmlFor="email" fontSize="sm" fontWeight="bold">
+              Email Address
+            </FormLabel>
+            <Input
+              name="email"
+              type="email"
+              id="email"
+              value={formData.email}
+              pattern="[a-zA-Z0-9._%\+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              onChange={handleInputChange}
+            />
           </FormControl>
 
           <FormControl mb={2}>
-            <FormLabel  fontSize="sm" fontWeight="bold">Phone Number</FormLabel>
-            <Input name='phoneNumber' type='number' value={formData.phoneNumber} onChange={handleInputChange} />
+            <FormLabel htmlFor="phoneNumber" fontSize="sm" fontWeight="bold">
+              Phone Number
+            </FormLabel>
+            <Input
+              name="phoneNumber"
+              type="text"
+              id="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+            />
           </FormControl>
 
           <Box>
-            <Text className='uppercase font-bold text-orange text-xs my-4'>Shipping Info</Text>
+            <Text className="uppercase font-bold text-orange text-xs my-4">
+              Shipping Info
+            </Text>
             <FormControl mb={2}>
-              <FormLabel  fontSize="sm" fontWeight="bold">Your Address</FormLabel>
-              <Input name='address' type='address' value={formData.address} onChange={handleInputChange} />
+              <FormLabel htmlFor="address" fontSize="sm" fontWeight="bold">
+                Your Address
+              </FormLabel>
+              <Input
+                name="address"
+                type="address"
+                id="address"
+                value={formData.address}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+            <FormControl mb={2}>
+  <FormLabel htmlFor="zipCode" fontSize="sm" fontWeight="bold">
+    Zip Code
+  </FormLabel>
+  <Input
+    name="zipCode"
+    type="text"
+    id="zipCode" // Ensure this id matches the htmlFor attribute above
+    value={formData.zipCode}
+    onChange={handleInputChange}
+  />
+</FormControl>
+
+            <FormControl mb={2}>
+              <FormLabel htmlFor="city" fontSize="sm" fontWeight="bold">
+                City
+              </FormLabel>
+              <Input
+                name="city"
+                type="city"
+                id="city"
+                value={formData.city}
+                onChange={handleInputChange}
+              />
             </FormControl>
 
             <FormControl mb={2}>
-              <FormLabel  fontSize="sm" fontWeight="bold">Zip Code</FormLabel>
-              <Input name='zipCode' type='number' value={formData.zipCode} onChange={handleInputChange} />
-            </FormControl>
-
-            <FormControl mb={2}>
-              <FormLabel  fontSize="sm" fontWeight="bold">City</FormLabel>
-              <Input name='city' type='city' value={formData.city} onChange={handleInputChange} />
-            </FormControl>
-
-            <FormControl mb={2}>
-              <FormLabel  fontSize="sm" fontWeight="bold">Country</FormLabel>
-              <Input name='country' type='country' value={formData.country} onChange={handleInputChange} />
+              <FormLabel htmlFor="country" fontSize="sm" fontWeight="bold">
+                Country
+              </FormLabel>
+              <Input
+                name="country"
+                type="country"
+                id="country"
+                value={formData.country}
+                onChange={handleInputChange}
+              />
             </FormControl>
           </Box>
 
           <Box>
-  <Text className='uppercase font-bold text-orange text-xs my-4'>Payment details</Text>
-  <FormControl as='fieldset' mb={2}>
-    <FormLabel as='legend' className='font-bold'>Payment method</FormLabel>
-    <RadioGroup name='paymentMethod' defaultValue='e-money' value={formData.paymentMethod}  onChange={(value) => setFormData({ ...formData, paymentMethod: value })}>
-      <Stack spacing='24px'>
-        <Radio value='e-money'>e-money</Radio>
-        <Radio value='cash'>Cash on delivery</Radio>
-      </Stack>
-    </RadioGroup>
-  </FormControl>
-</Box>
-
+            <Text className="uppercase font-bold text-orange text-xs my-4">
+              Payment details
+            </Text>
+            <FormControl as="fieldset" mb={2}>
+              <FormLabel
+                // htmlFor="paymentMethod"
+                as="legend"
+                className="font-bold"
+              >
+                Payment method
+              </FormLabel>
+              <RadioGroup
+                name="paymentMethod"
+                defaultValue="e-money"
+                value={formData.paymentMethod}
+                onChange={(value) =>
+                  setFormData({ ...formData, paymentMethod: value })
+                }
+              >
+                <Stack spacing="24px">
+                  <Radio value="e-money" id="e-money">
+                    <FormLabel htmlFor="e-money">e-money</FormLabel>
+                  </Radio>
+                  <Radio value="cash" id="cash">
+                    <FormLabel htmlFor="cash">Cash on delivery</FormLabel>
+                  </Radio>
+                </Stack>
+              </RadioGroup>
+            </FormControl>
+                 {/* Additional inputs for e-money payment */}
+          {formData.paymentMethod === "e-money" && (
+            <>
+              <FormControl mb={2}>
+                <FormLabel htmlFor="eMoneyNumber" fontSize="sm" fontWeight="bold">
+                  e-Money Number
+                </FormLabel>
+                <Input
+                  name="eMoneyNumber"
+                  type="text"
+                  id="eMoneyNumber"
+                  value={formData.eMoneyNumber}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+              <FormControl mb={2}>
+                <FormLabel htmlFor="eMoneyPin" fontSize="sm" fontWeight="bold">
+                  e-Money Pin
+                </FormLabel>
+                <Input
+                  name="eMoneyPin"
+                  type="password"
+                  id="eMoneyPin"
+                  value={formData.eMoneyPin}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+              </>
+          )}
+              {/* Additional message for cash on delivery */}
+              {formData.paymentMethod === "cash" && (
+            <Text>
+              Please keep exact change ready for the delivery person.
+            </Text>
+          )}
         </Box>
       </Box>
+            
+        
+      
+     
       <Box>
-         
-              <Box>
-
+        <Box className="mt-12">
+          <Text as="b" className="uppercase text-[18px]">summary</Text>
+          
+            {cartItems?.length > 0 && (
               <>
-  {cartItems?.length > 0 && (
-    <>
-      {cartItems.map((item, id) => (
-        <CartItem key={id} product={item} quantity={item.quantity} />
-      ))}
-      <Stack flexDir="row">
-        <Text>Shipping</Text>
-        <Text>$50</Text>
-      </Stack>
-      <Stack flexDir="row">
-        <Text>VAT (INCLUDED)</Text>
-        <Text>$1,079</Text>
-      </Stack>
-      <Stack flexDir="row">
-        <Text>GRAND TOTAL</Text>
-        <Text>total + shipping + VAT</Text>
-      </Stack>
-    </>
-  )}
-</>
-
-  
-</Box>
-
-              <Box>
-              <PaystackButton className="paystack-button" {...buttonProps} />
-      {/* <Link onClick={payWithPaystack()}>Continue and Pay</Link> */}
-              </Box>
-           
+                {cartItems.map((item, id) => (
+                  <SummaryCart key={id} product={item} quantity={item.quantity} />
+                ))}
+              
+              </>
+            )}
+          
         </Box>
+        <Stack flexDir="row" justifyContent="space-between">
+        <Text className="ml-4 uppercase text-slate-400">Total</Text>
+        <Text as="b" className="mr-6">
+          ${formattedTotalPrice}{" "}
+        </Text>
+      </Stack>
+      <Stack flexDir="row" justifyContent="space-between">
+        <Text className="ml-4 uppercase text-slate-400">Shipping</Text>
+        <Text as="b" className="mr-6">
+          ${shipping}{" "}
+        </Text>
+      </Stack>
+      <Stack flexDir="row" justifyContent="space-between">
+        <Text className="ml-4 uppercase text-slate-400">Vat(included)</Text>
+        <Text as="b" className="mr-6">
+          ${formattedVat}{" "}
+        </Text>
+      </Stack>
+      <Stack flexDir="row" justifyContent="space-between">
+        <Text className="ml-4 uppercase text-slate-400"> Grand Total</Text>
+        <Text as="b" className="mr-6">
+        ${grandTotal.toLocaleString()}{" "}
+        </Text>
+      </Stack>
+
+        
+        <Center  className="w- ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider" onClick={handleContinueAndPay}>
+                Continue & pay
+                </Center>
+        
+        
+              
+      </Box>
+
+      {/* Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <ModalOverlay />
+        <ModalContent maxH="600px" maxW="90%">
+          <ModalHeader>
+          <Image src='/public/resources/assets/checkout/icon-order-confirmation.svg' alt='payment success icon' />
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody >
+            <Text fontWeight="bold" className="uppercase text-[24px] "> Thank You for your order</Text>
+
+            <Text fontWeight="bold" mb={8} className="text-[15px] leading-4 tracking-wider ">
+             Your will receive an email confirmation shortly.
+            </Text>
+            <SummaryCart product={selectedItem} quantity={selectedItem?.quantity}  className=""/>
+            {/* You can customize the message further here */}
+            <Divider w="15rem" paddingInline='10' marginLeft={10}/>
+            <Center>
+            {getUniqueProducts(cartItems).length > 1 && (
+        <Text  mb={4} className="text-slate-400 text-[12px]">and {cartItems.length} other item(s)</Text>
+      )}
+            </Center>
+        
+            <Stack flexDir="column" justifyContent="space-evenly "   className="bg-black h-32 mt-10">
+        <Text className="ml-4 uppercase text-slate-400 text-[15px] text-slate-400 "> Grand Total</Text>
+        <Text as="b" className="mr-6 text-white text-[18px] ml-4">
+        ${grandTotal.toLocaleString()}{" "}
+        </Text>
+      </Stack>
+
+          </ModalBody>
+          <ModalFooter>
+            <Link to="/"> <Center  className="w-[20.7rem] ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider" >
+                Back to home
+                </Center>
+                </Link>
+        
+            
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Box>
     </Box>
   );
 };

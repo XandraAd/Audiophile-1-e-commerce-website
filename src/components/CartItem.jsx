@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-vars */
 
 import React,{useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Box,Flex,Button,Text,Stack,VStack } from "@chakra-ui/react";
+import { useDispatch} from "react-redux";
+import { Box,Flex,Text,Stack,VStack } from "@chakra-ui/react";
 import { GrFormAdd } from "react-icons/gr";
 import { RxMinus } from "react-icons/rx";
-import { increaseCart, decreaseCart, addToCart,removeFromCart, editCart,reduceCart} from "../slices/CartSlices"
+import {  addToCart,reduceCart} from "../slices/CartSlices"
 
 
 
@@ -17,7 +17,7 @@ const CartItem = ({ product}) => {
 
 
   
-  const cartItems = useSelector((state) => state?.carts.cartItems);
+  // const cartItems = useSelector((state) => state?.carts.cartItems);
 
 
  
@@ -42,21 +42,21 @@ const CartItem = ({ product}) => {
 
   return (
     <>
-       {console.log("Cart Items in cartitems:", cartItems)}
+       {/* {console.log("Cart Items in cartitems:", cartItems)} */}
      
-       <Stack  flexDir="row" key={product.id} className="">
+       <Stack  flexDir="row" key={product.id} className="w-[80%] mb-6">
       <img src={product?.image?.mobile} alt={product.name}  className="h-20 w-20"/>
       <Stack flexDir="row" className="">
         <VStack> 
-          <Text>{product.name}</Text>
-        <Text>${product.price}</Text>
+          <Text as="b" className="w-32">{product.name}</Text>
+        <Text className="text-slate-400 -ml-12 ">${product.price.toLocaleString()}</Text> 
         </VStack>
         
         <Flex justify="center" alignItems="center">
-                <Box className="flex border px-2 -mt-16 h-6 w-32">
-                  <Button className="">
-                    <RxMinus onClick={handleDecrease} />
-                  </Button>
+                <Box className="flex ring-2 ring-slate-300 px-2 py-4  bg-gray -mt-12 h-6 w-20 ml-10">
+               
+                    <RxMinus onClick={handleDecrease}  className="w-32 flex self-center"/>
+                  
                   <Text
                     marginInline={2}
                     style={{
@@ -66,11 +66,11 @@ const CartItem = ({ product}) => {
                       textTransform: "uppercase",
                     }}
                   >
-                    <span>{itemQuantity}</span>
+                    <span className="flex self-center -mt-3 w-[10px]">{itemQuantity}</span>
                   </Text>
-                  <Button>
-                    <GrFormAdd onClick={handleIncrease} />
-                  </Button>
+                 
+                    <GrFormAdd onClick={handleIncrease} className="w-32 flex self-center"/>
+                 
                 </Box>
                 <Box>
 
@@ -81,9 +81,7 @@ const CartItem = ({ product}) => {
       </Stack>
    
     </Stack>
-    <Box>   
-        <Text className="ml-20">Total :<span className="ml-[6rem]">${product.price * itemQuantity}</span> </Text>
-        </Box>
+     
    
     </>
   );

@@ -4,7 +4,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Products from "../components/Products";
 import ProductCard from "../components/ProductCard";
-import { Box, Text, Center, Flex } from "@chakra-ui/react";
+import { Box, Text, Center} from "@chakra-ui/react";
 import BestGear from "../components/BestGear";
 
 const CategoryPage = ({ data, handleButtonClick }) => {
@@ -17,7 +17,7 @@ const CategoryPage = ({ data, handleButtonClick }) => {
 
   return (
     <>
-      <Box className="bg-black text-white uppercase h-40 flex justify-center items-center">
+      <Box className="bg-black text-white uppercase h-40 2xl:h-64 flex justify-center items-center">
         <Center>
           <Text as="h1" fontSize="4xl">{categoryName}</Text>
         </Center>
@@ -29,7 +29,7 @@ const CategoryPage = ({ data, handleButtonClick }) => {
           categoryProducts={categoryProducts}
         />
       </Box>
-      <Box className="lg:h-80  xl2:mt-16">
+      <Box className="lg:h-80  xl2:mt-16 2xl:mb-32">
         <Products  data={data} />
       </Box>
       <Box className="lg:-mt-10 lg:relative lg:-left-4">
