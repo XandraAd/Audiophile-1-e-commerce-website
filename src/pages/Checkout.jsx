@@ -314,7 +314,7 @@ const Checkout = () => {
         <ModalOverlay />
         <ModalContent maxH="600px" maxW="90%">
           <ModalHeader>
-          <Image src='/public/resources/assets/checkout/icon-order-confirmation.svg' alt='payment success icon' />
+          <Image src='/resources/assets/checkout/icon-order-confirmation.svg' alt='payment success icon' />
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody >
