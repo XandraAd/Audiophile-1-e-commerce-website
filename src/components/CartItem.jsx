@@ -42,9 +42,7 @@ const CartItem = ({ product}) => {
 
   return (
     <>
-       {/* {console.log("Cart Items in cartitems:", cartItems)} */}
-     
-       <Stack  flexDir="row" key={product.id} className="w-[80%] mb-6">
+           <Stack  flexDir="row" key={product.id} className="w-[80%] mb-6 ">
       <img src={product?.image?.mobile} alt={product.name}  className="h-20 w-20"/>
       <Stack flexDir="row" className="">
         <VStack> 
@@ -53,7 +51,7 @@ const CartItem = ({ product}) => {
         </VStack>
         
         <Flex justify="center" alignItems="center">
-                <Box className="flex ring-2 ring-slate-300 px-2 py-4  bg-gray -mt-12 h-6 w-20 ml-10">
+                <Box className="flex shadow-md px-2 py-4  bg-gray -mt-12 h-6 w-20 ml-10 bg-lightgray">
                
                     <RxMinus onClick={handleDecrease}  className="w-32 flex self-center"/>
                   

@@ -26,8 +26,8 @@ export default {
         orange: '#D87D4A',
          blurOrange:'#FBAF8A',
         navbgColor:'#101010',
-        gray:'#F1F1F1',
-        lightgray:'#FAFAFA',
+        lightgray:'#F1F1F1',
+        gray:'#979797',
         white:'#FFFFFF',
         black:'#000000',
 

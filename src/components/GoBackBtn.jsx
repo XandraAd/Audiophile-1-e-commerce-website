@@ -2,18 +2,18 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
+// import Button from "../components/Button";
 
 const GoBackBtn = () => {
   // Access the history object using useHistory hook
   const navigate = useNavigate();
 
   // Function to navigate back in history on button click
-  const goToPreviousPath = () => navigate.goBack();
+  const goToPreviousPath = () => navigate(-1);
 
   return (
     // Render a button with "Go Back" text and custom styles
-    <Button onClick={goToPreviousPath}>Go Back</Button>
+    <div onClick={goToPreviousPath}>Go Back</div>
   );
 };
 

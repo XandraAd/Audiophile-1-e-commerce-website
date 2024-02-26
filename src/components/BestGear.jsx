@@ -14,7 +14,7 @@ const BestGear = () => {
   };
 
   return (
-    <Box mt={{base:"20",lg:"14"}} mb={20} className="px-3 ml-5 lg:grid lg:grid-cols-2 lg:h-80  xl2:h-[500px]  w-[90%] md:w-[82%] lg:w-[72%] xl:w-[76%]  xl2:w-[65%] lg:absolute  xl:left-[3rem] ">
+    <Box mt={{base:"15rem",md:"12rem",lg:"14"}} mb={{base:"80",md:"2",lg:"80"}} className="px-3 ml-5 lg:grid lg:grid-cols-2 lg:h-80  xl2:h-96 w-[90%] md:w-[94%] lg:w-[95%]  md:relative  md:-left-[3rem] lg:-left-[10rem] ">
       {/* Image Section */}
       <img
         src={
@@ -25,19 +25,20 @@ const BestGear = () => {
             : aboutUs.imageUrl
         }
         alt={aboutUs.imageAlt}
-        className="md:h-[14rem] md:ml-12 md:w-full lg:h-full  lg:order-2 order-1  lg:w-full lg:ml-[9rem] xl:ml-[6.5rem] xl2:mt-10  xl2:ml-[13rem] 2xl:px-0 2xl:ml-[18.5rem] "
+        className=" rounded-md md:h-[20rem] md:ml-12 md:w-full lg:h-[588px]  lg:order-2 order-1  lg:w-[400px] lg:ml-[14rem] xl:ml-[13.5rem] xl:w-[460px] xl2:mt-16  xl2:ml-[15rem] 2xl:px-0 2xl:ml-[18.5rem] 2xl:w-[850px] 2xl:h-[888px] "
       />
 
       {/* Text Section */}
       <Center>
         <Box>
-          <Box mt={{base:'4', md:'8',}} fontWeight="extrabold" as="h4" className="lg:order-1 lg:ml-28 md:ml-14 xl:ml-[2rem] xl2:-ml-10 ">
+          <Box mt={{base:'4', md:'8'}} fontWeight="extrabold" as="h4" className="lg:order-1 lg:ml-48 md:ml-14 xl:ml-[26rem] xl2:-ml-10 ">
             <Center>
               <Text
                 size="md"
-                marginInline={{ base: '12', md: '0'}}
-                noOfLines={4}
-                className="uppercase w-64 text-justify text-[28px] font-medium md:w-screen  md:text-center lg:text-[32px] lg:w-[20rem] lg:relative lg:left-10 xl2:w-96  lg:text-start  xl:text-[40px] xl:w-[25rem]  xl:left-3 xl2:text-[56px] xl2:left-56 xl2:w-[35rem] 2xl:ml-0 2xl:w-[35rem]"
+                marginInline={{ base: '10', md: '0'}}
+                noOfLines={2}
+                className="uppercase w-64 text-justify text-[28px] font-bold
+                 md:w-[574px] md:text-[40px] md:text-center lg:text-[32px] lg:w-[20rem] lg:relative lg:left-10 xl2:w-96  lg:text-start  xl:text-[40px] xl:w-[25rem]  xl:left-3 xl2:text-[56px] xl2:left-80 xl2:w-[35rem] 2xl:left-64 2xl:w-[40rem]"
               >
                 Bringing you the <span style={{ color: "orange" }}>best</span> audio gear
               </Text>
@@ -49,7 +50,7 @@ const BestGear = () => {
               fontWeight="semibold"
               as="h4"
               noOfLines={[12,14 ]}
-              className="text-center md:items-center md:relative md:ml-14 md:w-[32rem] md:h-[180px] lg:w-[22rem] lg:text-[14px] lg:h-[210px] lg:text-start lg:ml-56  xl:ml-2 xl2:ml-56 2xl:w-[45rem] 2xl:text-[32px]  2xl:ml-[36rem] 2xl:h-[500px] "
+              className="text-gray text-center md:items-center md:relative md:ml-14  md:h-[180px] lg:w-[25rem] lg:text-[14px] lg:h-[210px] lg:text-start lg:ml-[22rem]  xl:left-10  xl:w-[26rem] xl2:ml-[24rem] 2xl:w-[57rem] 2xl:text-[32px]  2xl:ml-[40rem] 2xl:h-[500px] "
             >
               {aboutUs.description}
             </Box>

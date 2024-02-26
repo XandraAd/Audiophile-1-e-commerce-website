@@ -2,7 +2,16 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Box, Center, Stack, Text, Flex, Image, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Stack,
+  Text,
+  Flex,
+  Image,
+  Link,
+  Grid,
+} from "@chakra-ui/react";
 import Button from "./Button";
 import { GrFormAdd } from "react-icons/gr";
 import { RxMinus } from "react-icons/rx";
@@ -15,10 +24,11 @@ import {
 } from "../slices/CartSlices";
 import Products from "./Products";
 import BestGear from "./BestGear";
+import GoBackBtn from "./GoBackBtn";
 
 const ProductDetailsPage = ({ product, handleButtonClick }) => {
   const [selected, setSelected] = useState(null);
-  const { productName,slug, name } = useParams();
+  const { productName, slug, name } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartCount = useSelector((state) => state.carts?.count ?? 0);
@@ -26,7 +36,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
   useEffect(() => {
     // Reset count when component unmounts
     return () => {
-      dispatch(resetCartCount()); 
+      dispatch(resetCartCount());
     };
   }, [dispatch]);
 
@@ -50,17 +60,25 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
     gallery,
     description,
     price,
+
     categoryImage,
     features,
     includes,
   } = selected;
+
+  const isNew = (selected) => {
+    if (selected.new === true) {
+      return "New Product";
+    } else {
+      return "";
+    }
+  };
 
   // Destructure gallery images
   const { first, second, third } = gallery || [];
 
   const handleDecrease = () => {
     dispatch(decreaseCart());
-    
   };
   const handleIncrease = () => {
     dispatch(increaseCart());
@@ -74,27 +92,23 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
     }
   };
 
-  const handleGoBack = () => {
-    navigate(-1); 
-  };
+
 
   return (
     <>
-      <Box className="">
-        <Box>
-       
-            <Button className="capitalize p-2 ring-2 ring-slate-300" onClick={handleGoBack}> Go back</Button>
-          
-        </Box>
+      <Box className="m-2 max-w-full ">
+        <Button className="capitalize p-2 shadow-sm">
+          <GoBackBtn />
+        </Button>
 
         <Box
           mt={20}
-          mb={20}
-          className="px-3 ml-4   relative  lg:grid lg:grid-cols-2 lg:h-[26rem] xl2:h-[588px] w-[92%] md:ml-20 md:w-[80%]   lg:w-[72%] xl:w-[78%] xl:h-[32rem] xl2:w-[79%]  "
+          mb={{base:"20",lg:"0"}}
+          className="px-3 ml-4   relative  lg:grid lg:grid-cols-2 lg:h-[26rem] xl2:h-[588px] w-[92%]  lg:w-[65%] xl:w-[78%] xl:h-[32rem] xl2:w-[79%]  "
         >
-          <Box className="md:w-96">
+          <Box className="md:w-full lg:w-[700px]">
             {/* Image Section */}
-            <Flex flexDir={{ base: "column", md: "row" }}>
+            <Stack flexDir={{ base: "column", md: "row" }}>
               <Center>
                 <Image
                   srcSet={`
@@ -107,28 +121,41 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
          1200px"
                   src={categoryImage.desktop}
                   alt={name}
-                  className="h-[20rem] w-full object-cover bg-gray md:h-[30rem] md:w-[80rem] lg:h-full lg:order-2 order-1 lg:w-[150%] lg:ml-20 xl2:mt-10"
+                  className="h-[20rem] w-full object-cover bg-gray md:h-[15rem]  lg:order-2 order-1 lg:w-[700px] md:h-[25rem]  lg:relative lg:left-32 "
                 />
               </Center>
 
               {/* Text Section */}
-              <Box flex={{ base: "none", lg: "1" }} mr={{ base: "0", lg: "4" }}>
+              <Box flex={{ base: "0"}} mr={{ base: "0", lg: "1" }} className="lg:relative lg:left-32">
                 <Center>
-                  <Box flexDir={{ base: "column", lg: "row" }}>
-                    <Stack flexDir={{ base: "column", lg: "row" }}>
-                      <Box>
+                  <Box flexDir={{ base: "column"}}>
+                    <Stack flexDir={{ base: "column"}}>
+                      <Box className="md:ml-16 text-start ">
+                        <Box mb="1rem">
+                          <Text
+                            style={{
+                              fontFamily: "Manrope",
+                              fontSize: "14px",
+                              fontWeight: "regular",
+                              textTransform: "uppercase",
+                            }}
+                            className="text-orange tracking-widest lg:relative lg:w-[20rem] " 
+                          >
+                            {isNew(selected)}
+                          </Text>
+                        </Box>
                         <Box mb="1rem">
                           <Text
                             as="b"
                             style={{
-                              marginBottom: "1rem",
+                             
                               fontFamily: "Manrope",
                               fontSize: "28px",
-
                               textTransform: "uppercase",
                             }}
+                            className="md:w-20"
                           >
-                            {name}
+                            {selected.name}
                           </Text>
                         </Box>
                         <Box mb="1rem">
@@ -138,7 +165,9 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                               fontFamily: "Manrope",
                               fontSize: "15px",
                               fontWeight: "medium",
+                            
                             }}
+                            className="md:w-[20rem] "
                           >
                             {description}
                           </Text>
@@ -161,13 +190,17 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                   </Box>
                 </Center>
               </Box>
-            </Flex>
+            </Stack>
           </Box>
 
           <Center>
-            <Box flexDir={{ base: "column", lg: "row" }}>
+            <Box flexDir={{ base: "column" }} className="lg:relative lg:left-20 lg:top-[20rem]" >
               <Flex justify="center" alignItems="center">
-                <Box mr="1rem" mb="1rem" className="flex border py-2 px-6">
+                <Box
+                  mr="1rem"
+                  mb="1rem"
+                  className="flex border py-2 px-6 md:ml-48 bg-lightgray"
+                >
                   <Button>
                     <RxMinus onClick={handleDecrease} />
                   </Button>
@@ -196,15 +229,17 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                 </Box>
               </Flex>
 
-              <Box>
+              <Box className=" md:w-[680px]  md:mb-8 md:-ml-2 lg:w-[780px]  lg:mb-12 lg:-ml-16 lg:mt-16" >
                 <Text
                   as="b"
+                 
                   style={{
                     fontFamily: "Manrope",
                     fontSize: "24px",
-                    fontWeight: "bold",
+                   
                     textTransform: "uppercase",
                   }}
+                
                 >
                   Features
                 </Text>
@@ -214,11 +249,12 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                     fontSize: "15px",
                     fontWeight: "medium",
                   }}
+                  className="md:px-16 md:-ml-16 w-full whitespace-pre-line"
                 >
                   {features}
                 </Text>
               </Box>
-              <Box mt="1rem">
+              <Box marginTop={4} className="md:grid md:grid-cols-2  md:-ml-1 md:mb-12 lg:w-[780px]  lg:mb-20 lg:-ml-16 lg:mt-16">
                 <Text
                   style={{
                     fontFamily: "Manrope",
@@ -230,10 +266,9 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                   In the box
                 </Text>
                 <ul>
-                  <li>Includes:</li>
                   {Array.isArray(includes) ? (
                     includes.map((item, id) => (
-                      <li key={id}>
+                      <li key={id} className="md:ml-28">
                         <p>
                           <span className="text-orange">{item.quantity}</span>
                           <span className="text-orange">x </span>
@@ -248,38 +283,66 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
               </Box>
             </Box>
           </Center>
-          <Box>
-            <Stack>
+          <Grid
+            templateRows={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            gap={4}
+            className="md:w-[740px] md:-ml-2 lg:w-[780px]  lg:mb-12 lg:ml-28 lg:mt-64 "
+           
+          >
+            <Stack >
               {/* Gallery images */}
-              {[first, second, third].map((gallery, index) => (
+              {[first, second].map((gallery, index) => (
                 <Image
                   key={index}
                   srcSet={`
-              ${gallery?.mobile} 480w,
-              ${gallery?.tablet} 800w,
-              ${gallery?.desktop} 1200w
-            `}
+          ${gallery?.mobile} 480w,
+          ${gallery?.tablet} 800w,
+          ${gallery?.desktop} 1200w
+        `}
                   sizes="(max-width: 480px) 480px,
-              (max-width: 800px) 800px
-              1200px"
-                  src={gallery?.desktop || categoryImage.desktop} // Use desktop image by default
+               (max-width: 800px) 800px
+               1200px"
+                  src={gallery?.desktop || categoryImage.desktop}
                   alt={`Gallery Image ${index + 1}`}
-                  className="mt-4"
+                  className="mt-4 md:px-6 md:-ml-6 lg:w-[480px] lg:h-[16.2rem]"
                 />
               ))}
             </Stack>
-          </Box>
-          <Box>
+            <Stack>
+              {/* Gallery images */}
+              {[third].map((gallery, index) => (
+                <Image
+                  key={index}
+                  srcSet={`
+          ${gallery?.mobile} 480w,
+          ${gallery?.tablet} 800w,
+          ${gallery?.desktop} 1200w
+        `}
+                  sizes="(max-width: 480px) 480px,
+               (max-width: 800px) 800px
+               1200px"
+                  src={gallery?.desktop || categoryImage.desktop} // Use desktop image by default
+                  alt={`Gallery Image ${index + 3}`}
+                  className="mt-4  md:-ml-12  md:min-h-[26.5rem]  md:min-w-[15.5rem] lg:min-h-[34rem] "
+                />
+              ))}
+            </Stack>
+          </Grid>
+
+          <Box  className="md:-mt-36  lg:mt-[63rem]  ">
             <Center>
-              <Text className="uppercase font-bold mt-32 mb-4 text-[24px]">
+              <Box className="lg:w-full lg:-ml-72">
+                <Text className="uppercase font-bold w-96  mt-32 mb-4  md:-mt-96 md:w-[450px] md:ml-[180px] text-[28px] tracking-[0.8px] lg:-mt-32  lg:w-[23rem] ">
                 You may also like
-              </Text>
+              </Text></Box>
+              
             </Center>
 
-            <Box>
-              <Stack>
+            <Box >
+              <Stack flexDir={{ base: "column", md: "row" }}  className="md:w-[710px] lg:w-[720px] ">
                 {others.map((item, index) => {
-                  const { image, name } = item;
+                  const { image, name ,slug} = item;
                   const { mobile, tablet, desktop } = image;
                   return (
                     <Stack key={index}>
@@ -295,16 +358,25 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           1200px"
                         src={desktop || categoryImage.desktop}
                         alt={`others Image ${index + 1}`}
-                        className="mt-4 h-[150px] w-full object-contain bg-gray"
+                        className="mt-4 h-[180px] w-full object-contain bg-lightgray md:h-[250px] md:-mt-16 md:-ml-2 md:object-cover md:w-[300px] lg:w-[530px] lg:-ml-48"
                       />
-                      <Text className="font-bold text-[24px] m-auto">
+                      <Text
+                        as="b"
+                        noOfLines={2}
+                        textTransform="uppercase"
+                        fontSize="24px"
+                        margin="auto"
+                       className="md:relative md:-left-6 lg:-left-48">
                         {name}
                       </Text>
                       <Box marginLeft={32}>
-                      <Link to={`/product/${item.slug}`}
-                        onClick={() => handleButtonClick(slug)}
+                        <Link
+                          to={`/product/${slug}`}
+                          onClick={() =>
+                            handleButtonClick(name, slug)
+                          }
                         >
-                          <Button className="bg-orange py-2 px-2 text-white mb-[1rem]">
+                          <Button className="bg-orange py-2 px-2 text-white mb-[1rem] -ml-8   md:h-[3rem] md:-ml-28 lg:md:-ml-[18rem]">
                             See Product
                           </Button>
                         </Link>
@@ -317,10 +389,10 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           </Box>
         </Box>
       </Box>
-      <Box>
+      <Box className="md:-ml-6 lg:mt-[95rem]  lg:w-[30rem] lg:ml-8 ">
         <Products data={product} />
       </Box>
-      <Box>
+      <Box className="">
         <BestGear />
       </Box>
     </>

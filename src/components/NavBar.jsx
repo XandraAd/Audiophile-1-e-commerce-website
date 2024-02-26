@@ -22,7 +22,8 @@ import {
   ModalHeader,
   ModalFooter,
   ModalOverlay,
-  Stack
+  Stack,
+  Divider
 } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
@@ -106,8 +107,8 @@ const NavBar = ({ data }) => {
 
   return (
     <>
-      <nav className="flex bg-navbgColor py-4 text-white max-w-screen xl:place-content-between 2xl:py-8 ">
-        <Flex className="md:mx-[6rem]  lg:mx-14  xl:mx-[12rem] 2xl:mx-[30rem]">
+      <nav className="relative  z-10 flex bg-navbgColor py-8 px-2 text-white min-w-screen xl:place-content-between 2xl:py-12 2xl:px-6 ">
+        <Flex className="md:mx-[1rem]  lg:mx-14  xl:mx-[12rem] 2xl:mx-[30rem]">
           <Box>
             {/* Mobile menu button*/}
             <IconButton
@@ -127,7 +128,7 @@ const NavBar = ({ data }) => {
                 src="../../resources/assets/shared/desktop/logo.svg"
                 alt="company logo"
               
-                className=" ml-4 mr-40 md:mr-[30rem] lg:ml-[6.5rem] lg:mt-4  xl:ml-2  xl:mr-0 xl2:mr-32 xl2:ml-8  2xl:mr-[22rem] 2xl-w-32 "
+                className=" mx-[7rem] md:mx-[16rem] lg:ml-[1rem] lg:mt-4 lg:mx-[30rem]  xl:ml-2   xl2:mr-32 xl2:ml-8   2xl:w-96   2xl:-ml-24"
                 
               />
             </Link>
@@ -137,7 +138,7 @@ const NavBar = ({ data }) => {
             <Box>
               <Box
                 as="div"
-                className={` lg:absolute  lg:left-[23rem] lg:mt-4  xl:left-[34rem] xl2:mx-6 2xl:text-[30px] 2xl:left-[60rem] `}
+                className={` lg:absolute  lg:left-[21rem] lg:mt-4  xl:left-[30rem] xl2:left-[35rem] xl2:text-[24px] 2xl:left-[64rem] `}
               >
                 <Box
                   as="div"
@@ -147,16 +148,17 @@ const NavBar = ({ data }) => {
                 >
                   {uniqueCategories.map((category) => (
                     <Box
+                    fontSize={{base:"13px", "2xl":"28px"}}
                       key={category}
                       as="h2"
                       cursor="pointer"
-                      className={`lg:px-2 ${
+                      className={`lg:px-4 leading-6 tracking-wider  2xl:mt-4 ${
                         activeTab === category ? "text-orange" : " text-white"
                       }`}
                       onClick={() => handleTabChange(category)}
                     >
                       {category === "Home" ? (
-                        <Link to="/" className="text-md uppercase">Home</Link>
+                        <Link to="/" className="text-md uppercase ">Home</Link>
                       ) : (
                         <Link to={`/category/${category.toLowerCase()}`} className="text-md uppercase">
                           {category}
@@ -168,22 +170,22 @@ const NavBar = ({ data }) => {
               </Box>
             </Box>
           )}
-          <Box>
+          <Box >
             <RiShoppingCart2Line
-              ml={56}
+           
               text="white"
               style={{ width: "40px", height: "20px" }}
-              className="md:ml-2 2xl:ml-20 lg:ml-10 xl:relative xl:left-[40rem] xl:px-2 xl2:justify-baseline"
+              className="md:ml-2  lg:ml-64 lg:mt-5 xl:relative xl:left-0 xl:px-2 xl2:ml-[42rem]  2xl:left-[30rem] 2xl:mt-10"
               onClick={showModal}
             />
 
-            <span className="relative -top-9 left-6 text-orange ">
+            <span className="relative -top-9 left-6 text-orange  lg:left-[17.5rem] lg:-top-10 ">
               {cartCount !== 0 ? cartCount : null}
             </span>
           </Box>
         </Flex>
       </nav>
-      <Box className="divider"></Box>
+     
       <Drawer
         placement={placement}
         onClose={() => setIsDrawerOpen(false)}
@@ -200,7 +202,7 @@ const NavBar = ({ data }) => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      <Box>
+      <Box >
         <Modal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
@@ -210,7 +212,7 @@ const NavBar = ({ data }) => {
          
         >
           <ModalOverlay />
-          <ModalContent  maxH="600px" maxW="90%">
+          <ModalContent  maxH="600px" maxW={{base:"90%",lg:"50%"}}>
             <ModalHeader>
               <Stack flexDir="row"className="flex
               justify-between">

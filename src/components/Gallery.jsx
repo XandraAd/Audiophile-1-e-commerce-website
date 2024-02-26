@@ -46,17 +46,17 @@ const Gallery = ({handleButtonClick}) => {
 
   return (
     <>
-    <div className="min-h-screen mx-[2rem] mt-10 md:mx-[5rem] lg:mx-[9rem] xl2:mx-[15rem] 2xl:mx-[31rem]">
-      <div className="bg-orange 2xl:h-[45rem] 2xl:mr-12">
+    <div className=" min-h-full mx-[2rem] mt-10 md:mr-[2.55rem] md:ml-8 md:mt-28 lg:mx-[4.5rem] xl:mr-[8.5rem] xl:ml-[12rem] xl2:mr-[13rem] xl2:ml-[15.5rem]  2xl:mx-[25rem] 2xl:w-[1855px] ">
+      <div className="rounded-md  h-[600px] lg:h-[400px] bg-orange xl:h-[600px] xl2:h-full 2xl:h-[900px] 2xl:mr-12">
       <div className="">
         {/* Content */}
         {speakerZX9Data.map((speaker) => (
           <div
             key={speaker.id}
-            className="relative z-999 items-center  py-10 flex flex-col lg:flex-row md:items-center lg:items-center lg:justify-center lg:gap-20 lg:px-10 xl2:px-0"
+            className="relative z-999 items-center  py-10 flex flex-col  md:items-center lg:flex-row lg:justify-center lg:gap-32 lg:px-20 "
           >
             {/* Pattern  Image */}
-            <div className="absolute -top-8 md:-top-16  lg:w-2/3 lg:-left-4">
+            <div className="absolute -top-8 md:-top-16  lg:w-2/3 lg:-left-20">
               <img src={speaker.patternimage} alt="pattern circles" />
             </div>
              {/* Speaker Image */}
@@ -70,25 +70,26 @@ const Gallery = ({handleButtonClick}) => {
                     : speaker.image
                 }
                 alt={speaker.name}
-                className="mb-2 w-40 md:w-50 lg:w-48 2xl:w-96 relative md:top-[2rem] xl:lg:w-56 xl:-left-32 xl:top-[3rem] 2xl:-left-[8rem] 2xl:top-[12rem] "
+                className="mb-2 w-40 md:w-50 relative md:top-[2rem] lg:top-[1.5rem] lg:w-[600px] xl:-left-8 xl:top-[8.5rem] xl2:-left-[1rem]  2xl:-left-[10rem] xl2:top-[3.4rem] 2xl:top-[9rem] "
               />
             </div>
 
             {/* Text content */}
-            <div className="text-white text-center lg:text-start ">
-              <div className="text-[36px] font-bold tracking-[1.3px] leading-9 mb-5 md:text-[48px] md:leading-[1em] lg:tracking-[2px] 2xl:tracking-[6px]  2xl:text-[56px]">
-                <div className="w-40 ml-16 md:w-64 lg:w-60 md:relative md:top-[4rem] md:-left-[2rem] lg:top-[4rem] 2xl:top-[10rem] 2xl:w-[20rem]">
+            <div className="text-white text-center lg:text-start lg:relative  lg:left-16 lg:-top-6 xl:top-12 2xl:top-2">
+              <div className="text-[36px] font-bold tracking-[1.3px] leading-9 mb-5 md:text-[48px] md:leading-[1em] lg:tracking-[2px] 2xl:tracking-[6px]  2xl:text-[56px] ">
+                <div className="w-56 ml-8 tracking-[1.3px] md:w-64 lg:w-60 md:relative md:top-[4rem] md:left-[0rem] lg:top-[4rem] 2xl:top-[10rem] 2xl:w-[20rem] uppercase"
+                >
                   {speaker.slug}
                 </div>
               </div>
-              <div className="text-[15px] mb-8 px-3 w-72 md:mb-8  md:relative md:top-[4rem] md:left-[1rem] lg:px-10 lg:ml-6 lg:-left-[2rem] lg:top-[4rem] 2xl:top-[10rem]">
+              <div className="text-[15px] mb-8 px-3 w-72 md:mb-8  md:relative md:top-[4rem] md:left-[1rem] lg:px-10 lg:ml-6 lg:-left-[2rem] lg:top-[4rem] 2xl:top-[10rem] 2xl:text-[24px] 2xl:w-[32rem] ">
                 Upgrade to premium speakers that are phenomenally built to
                 deliver truly remarkable <br className="hidden" /> sound
               </div>
               {/* Product button */}
               <Link to={`/product/${speaker.slug}`}>
                 <Button
-                  className="bg-black px-6 py-3 font-bold   md:relative md:top-[2rem]  lg:hover:bg-lightgray lg:ml-10 2xl:top-[10rem]"
+                  className="bg-black px-6 py-3 font-bold   md:relative md:top-[4rem]  lg:hover:bg-lightgray lg:ml-10 2xl:top-[10rem] 2xl:text-[32px]"
                   onClick={() => handleButtonClick(speaker.slug)}
                 >
                   SEE PRODUCT
@@ -103,7 +104,7 @@ const Gallery = ({handleButtonClick}) => {
 
  
 
-       <div className="md:mx-0 lg:-mx-[2.5rem] lg:my-0 xl:px-[1rem] xl2:relative xl2:-left-8 xl2:-mx-6 2xl:mx-[0rem] 2xl:-left-14 2xl:h-[28.5rem]">
+       <div className= "rounded-md h-[320px] md:mx-0 lg:-mx-[2.5rem] lg:my-10 xl:px-[1rem] xl2:relative xl2:-left-8 xl2:-mx-6 2xl:mx-[0rem] 2xl:-left-14 2xl:h-[48.5rem] 2xl:mt-32 ">
         {speakerZX7Data.map((speaker) => (
           <div
             key={speaker.id}
@@ -118,22 +119,22 @@ const Gallery = ({handleButtonClick}) => {
                   ? speaker.tabletImage 
                   : speaker.image}
                 alt={speaker.name}
-                className="mb-5 md:w-screen md:h-72  lg:h-[20rem] xl2:h-[22rem] 2xl:h-[28rem] "
+                className=" rounded-md mb-5 md:w-screen md:h-72  lg:h-[20rem] xl2:h-[22rem] 2xl:h-[38rem] "
               />
             </div> 
 
             {/* text content */}
-             <div className=" absolute top-32 text-black text-center w-64 h-64 md:h-[68px] ">
+             <div className=" absolute top-32 text-black text-center w-64 h-64 md:h-[68px] 2xl:top-56 2xl:left-28">
               <div className="">
-                <div className="text-[28px] font-bold tracking-[2px] leading-10 mb-10 md:leading-[1em] md:font-bold md:mb-5 lg:tracking-[2px]">
-                  <div className="font-extrabold uppercase pt-8">{speaker.slug} </div>
+                <div className=" font-bold tracking-[2px] leading-10 mb-10 md:leading-[1em] md:font-bold md:mb-5 lg:tracking-[2px]">
+                  <div className="font-black uppercase pt-8 text-[28px] 2xl:text-[32px] ">{speaker.slug} </div>
                   
                 </div>
               </div> 
               {/* product button */}
 
                <Link to={`/product/${speaker.slug}`}>
-                <Button className="bg-inherit border border-black ml-4 px-6 py-3 text-black md:-ml-[3rem] font-bold lg:hover:bg-lightgray lg:-ml-10  lg:text-black" onClick={() => handleButtonClick(speaker.slug)}>
+                <Button className="bg-inherit border border-black -ml-10 px-6 py-3 text-black md:-ml-[3rem] font-bold lg:hover:bg-lightgray lg:-ml-10  lg:text-black 2xl:text-[32px]" onClick={() => handleButtonClick(speaker.slug)}>
                   SEE PRODUCT
                 </Button>
               </Link> 
@@ -141,14 +142,14 @@ const Gallery = ({handleButtonClick}) => {
           </div>
         ))}
       </div> 
-        <div className="mt-12   md:mx-1 md:mt-4  lg:my-8 xl:mx-[0] xl2:mt-16 2xl:mx-[0rem] ">
+        <div className="h-[300px] mt-28   md:mx-0 md:mt-10 lg:my-[7rem]  xl:mx-[1] xl2:mt-32 2xl:mt-8 2xl:h-[600px]">
         {EarphoneYX1Data.map((earphone) => (
           <div
             key={earphone.id}
-            className=" md:grid md:grid-cols-2 md:py-0"
+            className="h-[200px]  md:grid md:grid-cols-2 md:py-0 lg:h-[400px] 2xl:h-[600px]"
           >  
             {/* Earphone image */}
-              <div className="h-64 ">
+              <div className=" h-64 ">
               <img
                  src={ window.innerWidth < 480
                   ? earphone.mobileImage
@@ -156,16 +157,16 @@ const Gallery = ({handleButtonClick}) => {
                   ? earphone.tabletImage 
                   : earphone.image}
                 alt={earphone.name}
-                className=" md:w-80 lg:w-full lg:h-[15rem] xl:h-[18rem] xl2:h-[22rem] 2xl:h-[30rem]"
+                className="rounded-md  md:w-80 lg:w-full lg:h-[20rem] xl:h-[22rem] xl2:h-[25rem] 2xl:h-[40rem]"
               />
             </div>  
 
             {/* text content */}
-                <div className="px-8 text-black bg-gray shadow-md h-[180px] -mt-12 
-                md:absolute md:left-[25rem] md:top-[132rem] md:h-[285px] md:w-[295px] lg:left-[33rem] lg:top-[128.7rem] lg:h-[240px] lg:px-16 lg:w-[355px]   xl:w-[465px] xl:left-[42rem]  xl:top-[131.5rem] xl:h-[290px] xl2:left-[47rem] xl2:w-[450px] xl2:h-[350px] xl2:top-[141.8rem] 2xl:left-[81rem]  2xl:h-[490px]  2xl:top-[227.4rem] 2xl:w-[720px]"> 
-              <div className="md:absolute md:left-12 md:top-6 xl:left-24 "> 
+                <div className="rounded-md  h-[200px] px-8 text-black bg-lightgray shadow-md -mt-6 
+                md:absolute md:left-[26rem] md:top-[133.5rem] md:h-[305px] md:w-[310px] lg:left-[35rem] lg:top-[136.5rem] lg:h-[321px] lg:px-16 lg:w-[400px]   xl:w-[460px] xl:left-[42.7rem]  xl:top-[151rem] xl:h-[350px] xl2:left-[49rem] xl2:w-[450px] xl2:h-[400px] xl2:top-[151rem] 2xl:left-[87rem]  2xl:h-[646px]  2xl:top-[244.6rem] 2xl:w-[820px]"> 
+              <div className="md:absolute md:left-12 md:-top-8 xl:left-24 "> 
                  <div className="text-[25px]  tracking-[1px] leading-8 my-8 md:leading-[1em] md:mb-5  lg:tracking-[2px]"> 
-                  <div className="font-extrabold uppercase pt-8">{earphone.slug}</div> 
+                  <div className="font-black uppercase pt-32 2xl:text-[32px]">{earphone.slug}</div> 
                   
                  </div> 
               </div> 
@@ -173,7 +174,7 @@ const Gallery = ({handleButtonClick}) => {
 
               <Link to={`/product/${earphone.slug}`}>
 
-                <Button className="bg-inherit border border-black ml-4  mb-2 px-6 py-3 text-black font-bold lg:hover:bg-lightgray md:relative  md:left-2 md:top-48 lg:top-[10rem] lg:-left-8 xl:left-4 lg:text-black" onClick={() => handleButtonClick(earphone.slug)}>
+                <Button className="bg-inherit border border-black ml-2  mb-2 px-6 py-3 text-black font-bold lg:hover:bg-lightgray md:relative  md:left-2 md:top-48 lg:top-[10rem] lg:-left-8 xl:left-4 lg:text-black 2xl:text-[32px] 2xl:top-64" onClick={() => handleButtonClick(earphone.slug)}>
                   SEE PRODUCT 
                  </Button>
               </Link>

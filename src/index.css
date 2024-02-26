@@ -18,7 +18,7 @@ body{
 }
 
 .divider {
- border-bottom: .2px solid red;
+ border-bottom: .2px solid #979797;
  width: 100%;
 
 }
@@ -36,7 +36,7 @@ body{
   margin-bottom: 6rem;}
 
   .divider {
-    border-bottom: .2px solid red;
+    border-bottom: .2px solid #979797;
     width: 75%;
     margin: 0 auto;
    
@@ -46,7 +46,7 @@ body{
   @media screen and (min-width: 1024px) {
     
   .divider {
-    border-bottom: .2px solid red;
+    border-bottom: .2px solid #979797;
     width: 70%;
     margin: 0 auto;
    
@@ -67,7 +67,7 @@ body{
     }
  
     .divider {
-      border-bottom: .2px solid red;
+      border-bottom: .2px solid #979797;
       width: 70%;
       margin: 0 auto;
      
@@ -77,7 +77,7 @@ body{
   
  
     .divider {
-      border-bottom: .2px solid red;
+      border-bottom: .2px solid #979797;
       width: 62%;
       margin-left: 28rem;
      
@@ -90,3 +90,6 @@ body{
     }
    
   }
+
+
+

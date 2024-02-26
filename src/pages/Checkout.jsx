@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import {
+  Flex,
+  Grid,
   Center,
   Box,
   Text,
@@ -22,8 +24,6 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import CartItem from "../components/CartItem";
-import Button from "../components/Button"; // Import your custom Button component
 import GoBackBtn from "../components/GoBackBtn";
 import SummaryCart from "../components/SummaryCart";
 
@@ -38,6 +38,8 @@ const Checkout = () => {
     city: "",
     country: "",
     paymentMethod: "e-money",
+    eMoneyNumber: "", // Initialize with an empty string
+    eMoneyPin: ""     // Initialize with an empty string
   });
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const cartItems = useSelector((state) => state.carts.cartItems);
@@ -81,20 +83,33 @@ const Checkout = () => {
     });
   
     return uniqueProducts;
+
+
   };
 
+
+
+  const handlePaymentMethodChange = (value) => {
+    setFormData({ ...formData, paymentMethod: value });
+  };
+
+  
+
   return (
-    <Box mb={48} className="m-10">
+    <Box mb={48} className="m-10 lg:m-40">
       <Box className="mb-4">
         <GoBackBtn />
       </Box>
-      <Box>
+      <Box className="lg:m-20">
         <Box className="uppercase font-bold text-xl mb-10">Checkout</Box>
-        <Box>
-          <Text className="uppercase font-bold text-orange text-xs mb-2">
+        <Box >
+          <Text className="uppercase font-bold text-orange text-xs mb-2 text-[13px] my-10 lg:text-lg">
             Billing Address
           </Text>
-          <FormControl mb={2}>
+          <Grid   templateRows={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            gap={2}>
+             <FormControl mb={2}>
             <FormLabel htmlFor="name" fontSize="sm" fontWeight="bold">
               Name
             </FormLabel>
@@ -104,6 +119,7 @@ const Checkout = () => {
               id="name"
               value={formData.name}
               onChange={handleInputChange}
+              className="md:w-[20rem]"
             />
           </FormControl>
 
@@ -132,10 +148,11 @@ const Checkout = () => {
               value={formData.phoneNumber}
               onChange={handleInputChange}
             />
-          </FormControl>
+          </FormControl></Grid>
+          
 
           <Box>
-            <Text className="uppercase font-bold text-orange text-xs my-4">
+            <Text className="uppercase font-bold text-orange text-[13px] my-10 lg:text-lg">
               Shipping Info
             </Text>
             <FormControl mb={2}>
@@ -150,7 +167,10 @@ const Checkout = () => {
                 onChange={handleInputChange}
               />
             </FormControl>
-            <FormControl mb={2}>
+            <Grid   templateRows={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            gap={2}>
+                       <FormControl mb={2}>
   <FormLabel htmlFor="zipCode" fontSize="sm" fontWeight="bold">
     Zip Code
   </FormLabel>
@@ -188,21 +208,30 @@ const Checkout = () => {
                 onChange={handleInputChange}
               />
             </FormControl>
+            </Grid>
+   
           </Box>
 
           <Box>
-            <Text className="uppercase font-bold text-orange text-xs my-4">
+         
+            <Box>
+            <Text className="uppercase font-bold text-orange text-[13px] my-10 lg:text-lg">
               Payment details
             </Text>
+            <Grid  templateRows={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            templateColumns={{ base: "repeat(1, 1fr)", md: "1fr 2fr" }}
+            gap={2}
+            >
             <FormControl as="fieldset" mb={2}>
               <FormLabel
-                // htmlFor="paymentMethod"
                 as="legend"
                 className="font-bold"
               >
                 Payment method
               </FormLabel>
-              <RadioGroup
+              
+             <Box className="lg:relative lg:left-[20rem]">
+             <RadioGroup
                 name="paymentMethod"
                 defaultValue="e-money"
                 value={formData.paymentMethod}
@@ -211,18 +240,38 @@ const Checkout = () => {
                 }
               >
                 <Stack spacing="24px">
-                  <Radio value="e-money" id="e-money">
-                    <FormLabel htmlFor="e-money">e-money</FormLabel>
+                  <Box className="border-2 border-orange py-4 px-2 w-[20rem] rounded-lg">  
+                  <Radio value="e-money" id="e-money" 
+                   >
+                   <FormLabel htmlFor="e-money">e-money</FormLabel>
                   </Radio>
+                  </Box>
+                  <Box className="border-2 border-orange py-4 px-2 w-[20rem] rounded-lg">  
                   <Radio value="cash" id="cash">
-                    <FormLabel htmlFor="cash">Cash on delivery</FormLabel>
+                  <FormLabel htmlFor="cash">Cash on delivery</FormLabel>
                   </Radio>
+                  </Box>
                 </Stack>
               </RadioGroup>
-            </FormControl>
-                 {/* Additional inputs for e-money payment */}
-          {formData.paymentMethod === "e-money" && (
-            <>
+             </Box>
+            
+              </FormControl>
+              </Grid>
+              </Box>
+            
+              </Box>
+              
+             
+              
+             
+             
+            
+            
+                     {/* Additional inputs for e-money payment */}
+                     {(formData.paymentMethod === "e-money" || formData.paymentMethod === "cash") && (
+            <Box>
+               {formData.paymentMethod === "e-money" && (
+                <>
               <FormControl mb={2}>
                 <FormLabel htmlFor="eMoneyNumber" fontSize="sm" fontWeight="bold">
                   e-Money Number
@@ -232,7 +281,7 @@ const Checkout = () => {
                   type="text"
                   id="eMoneyNumber"
                   value={formData.eMoneyNumber}
-                  onChange={handleInputChange}
+                  onChange={handlePaymentMethodChange}
                 />
               </FormControl>
               <FormControl mb={2}>
@@ -244,19 +293,29 @@ const Checkout = () => {
                   type="password"
                   id="eMoneyPin"
                   value={formData.eMoneyPin}
-                  onChange={handleInputChange}
+                  onChange={handlePaymentMethodChange}
                 />
               </FormControl>
               </>
           )}
               {/* Additional message for cash on delivery */}
               {formData.paymentMethod === "cash" && (
-            <Text>
-              Please keep exact change ready for the delivery person.
+                <>
+                <Flex flexDirection={{base:"column", md:"row"}}>
+                <img src="/resources/assets/checkout/icon-cash-on-delivery.svg" alt=""  className="w-12 ml-[10rem] m-2 md:m-0" />
+            <Text className="w-full  ml-0 md:ml-10">
+           The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.
             </Text>
+                </Flex>
+               
+            </>
+         
           )}
-        </Box>
-      </Box>
+        
+            </Box>
+                     )}
+          
+      
             
         
       
@@ -350,6 +409,7 @@ const Checkout = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+    </Box>
     </Box>
     </Box>
   );
