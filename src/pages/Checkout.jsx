@@ -235,9 +235,10 @@ const Checkout = () => {
                 name="paymentMethod"
                 defaultValue="e-money"
                 value={formData.paymentMethod}
-                onChange={(value) =>
-                  setFormData({ ...formData, paymentMethod: value })
-                }
+                // onChange={(value) =>
+                //   setFormData({ ...formData, paymentMethod: value })
+                // }
+                onChange={handlePaymentMethodChange}
               >
                 <Stack spacing="24px">
                   <Box className="border-2 border-orange py-4 px-2 w-[20rem] rounded-lg">  
@@ -281,7 +282,7 @@ const Checkout = () => {
                   type="text"
                   id="eMoneyNumber"
                   value={formData.eMoneyNumber}
-                  onChange={handlePaymentMethodChange}
+                  onChange={handleInputChange}
                 />
               </FormControl>
               <FormControl mb={2}>
@@ -293,7 +294,7 @@ const Checkout = () => {
                   type="password"
                   id="eMoneyPin"
                   value={formData.eMoneyPin}
-                  onChange={handlePaymentMethodChange}
+                  onChange={handleInputChange}
                 />
               </FormControl>
               </>
@@ -371,7 +372,7 @@ const Checkout = () => {
       {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ModalOverlay />
-        <ModalContent maxH="600px" maxW="90%">
+        <ModalContent maxH="600px" maxW={{base:"90%",lg:"50%"}}>
           <ModalHeader>
           <Image src='/resources/assets/checkout/icon-order-confirmation.svg' alt='payment success icon' />
           </ModalHeader>

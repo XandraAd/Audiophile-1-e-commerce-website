@@ -163,7 +163,7 @@ const Gallery = ({handleButtonClick}) => {
 
             {/* text content */}
                 <div className="rounded-md  h-[200px] px-8 text-black bg-lightgray shadow-md -mt-6 
-                md:absolute md:left-[26rem] md:top-[133.5rem] md:h-[305px] md:w-[310px] lg:left-[35rem] lg:top-[136.5rem] lg:h-[321px] lg:px-16 lg:w-[400px]   xl:w-[460px] xl:left-[42.7rem]  xl:top-[151rem] xl:h-[350px] xl2:left-[49rem] xl2:w-[450px] xl2:h-[400px] xl2:top-[151rem] 2xl:left-[87rem]  2xl:h-[646px]  2xl:top-[244.6rem] 2xl:w-[820px]"> 
+                md:absolute md:left-[26rem] md:top-[133.5rem] md:h-[305px] md:w-[310px] lg:left-[35rem] lg:top-[135rem] lg:h-[321px] lg:px-16 lg:w-[400px]   xl:w-[460px] xl:left-[42.7rem]  xl:top-[151rem] xl:h-[350px] xl2:left-[49rem] xl2:w-[450px] xl2:h-[400px] xl2:top-[151rem] 2xl:left-[87rem]  2xl:h-[646px]  2xl:top-[244.6rem] 2xl:w-[820px]"> 
               <div className="md:absolute md:left-12 md:-top-8 xl:left-24 "> 
                  <div className="text-[25px]  tracking-[1px] leading-8 my-8 md:leading-[1em] md:mb-5  lg:tracking-[2px]"> 
                   <div className="font-black uppercase pt-32 2xl:text-[32px]">{earphone.slug}</div> 
@@ -174,7 +174,7 @@ const Gallery = ({handleButtonClick}) => {
 
               <Link to={`/product/${earphone.slug}`}>
 
-                <Button className="bg-inherit border border-black ml-2  mb-2 px-6 py-3 text-black font-bold lg:hover:bg-lightgray md:relative  md:left-2 md:top-48 lg:top-[10rem] lg:-left-8 xl:left-4 lg:text-black 2xl:text-[32px] 2xl:top-64" onClick={() => handleButtonClick(earphone.slug)}>
+                <Button className="bg-inherit border border-black ml-2  mb-2 px-6 py-3 text-black font-bold lg:hover:bg-lightgray md:relative  md:left-2 md:top-48 lg:top-[13rem] lg:-left-8 xl:left-4 lg:text-black 2xl:text-[32px] 2xl:top-64" onClick={() => handleButtonClick(earphone.slug)}>
                   SEE PRODUCT 
                  </Button>
               </Link>
