@@ -18,13 +18,13 @@ const CategoryPage = ({ data, handleButtonClick }) => {
   return (
     <>
     
-      <Box className="bg-navbgColor text-white uppercase h-[8rem]  2xl:h-64 flex justify-center items-center xl:relative xl:-top-4">
+      <Box className="bg-navbgColor text-white uppercase h-[8rem]  2xl:h-64 flex justify-center items-center md:relative md:-top-2">
      
         <Center>
           <Text as="h1" fontSize="4xl">{categoryName}</Text>
         </Center>
       </Box>
-      <Box className="  ">
+      <Box className=" ">
       <hr   className=" relative -top-[8rem] z-20 w-full md:w-[44rem] md:left-[2rem] md:-top-[9rem] lg:w-[55rem] lg:left-[5rem]  xl:left-[12.5rem]  xl2:w-[62rem] xl2:left-[14.5rem] 2xl:w-[110rem] 2xl:-top-[16rem] 2xl:left-[25rem]"/>
       </Box>
 

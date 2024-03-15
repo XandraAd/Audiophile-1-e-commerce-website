@@ -23,7 +23,7 @@ import {
   ModalFooter,
   ModalOverlay,
   Stack,
-  Divider
+  
 } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
@@ -128,7 +128,7 @@ const NavBar = ({ data }) => {
                 src="../../resources/assets/shared/desktop/logo.svg"
                 alt="company logo"
               
-                className=" mx-[7rem] md:mx-[16rem] lg:ml-[1rem] lg:mt-4 lg:mx-[30rem]  xl:ml-2   xl2:mr-32 xl2:ml-8   2xl:w-96   2xl:-ml-24"
+                className=" mx-[5rem] md:mx-[2rem]  md:mr-[28rem] lg:ml-[1rem] lg:mt-4 lg:mx-[30rem]  xl:ml-2   xl2:mr-32 xl2:ml-8   2xl:w-96   2xl:-ml-24"
                 
               />
             </Link>
@@ -179,7 +179,7 @@ const NavBar = ({ data }) => {
               onClick={showModal}
             />
 
-            <span className="relative -top-9 left-6 text-orange  lg:left-[17.5rem] lg:-top-10 ">
+            <span className="relative -top-9 left-6 text-orange  lg:left-[17.5rem] lg:-top-10  xl2:left-[43rem]">
               {cartCount !== 0 ? cartCount : null}
             </span>
           </Box>

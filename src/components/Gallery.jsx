@@ -157,16 +157,16 @@ const Gallery = ({handleButtonClick}) => {
                   ? earphone.tabletImage 
                   : earphone.image}
                 alt={earphone.name}
-                className="rounded-md  md:w-80 lg:w-full lg:h-[20rem] xl:h-[22rem] xl2:h-[25rem] 2xl:h-[40rem]"
+                className="rounded-md lg:w-full lg:h-[20rem] xl:h-[22rem] xl2:h-[25rem] 2xl:h-[40rem]"
               />
             </div>  
 
             {/* text content */}
                 <div className="rounded-md  h-[200px] px-8 text-black bg-lightgray shadow-md -mt-6 
-                md:absolute md:left-[26rem] md:top-[133.5rem] md:h-[305px] md:w-[310px] lg:left-[35rem] lg:top-[135rem] lg:h-[321px] lg:px-16 lg:w-[400px]   xl:w-[460px] xl:left-[42.7rem]  xl:top-[151rem] xl:h-[350px] xl2:left-[49rem] xl2:w-[450px] xl2:h-[400px] xl2:top-[151rem] 2xl:left-[87rem]  2xl:h-[646px]  2xl:top-[244.6rem] 2xl:w-[820px]"> 
+                md:absolute md:left-[26rem] md:top-[134.5rem] md:h-[325px] md:w-[310px] lg:left-[35rem] lg:top-[143rem] lg:h-[321px] lg:px-16 lg:w-[400px]   xl:w-[460px] xl:left-[42.7rem]  xl:top-[157.5rem] xl:h-[350px] xl2:left-[49rem] xl2:w-[450px] xl2:h-[400px] xl2:top-[157.5rem] 2xl:left-[87rem]  2xl:h-[646px]  2xl:top-[251rem] 2xl:w-[820px]"> 
               <div className="md:absolute md:left-12 md:-top-8 xl:left-24 "> 
                  <div className="text-[25px]  tracking-[1px] leading-8 my-8 md:leading-[1em] md:mb-5  lg:tracking-[2px]"> 
-                  <div className="font-black uppercase pt-32 2xl:text-[32px]">{earphone.slug}</div> 
+                  <div className="font-black uppercase pt-12 2xl:text-[32px]">{earphone.slug}</div> 
                   
                  </div> 
               </div> 

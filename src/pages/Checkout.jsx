@@ -67,7 +67,7 @@ const Checkout = () => {
    const formattedTotalPrice = totalPrice.toLocaleString();
 
   const shipping =parseInt(50)
-  const vat =parseInt(1079)
+  const vat =parseInt(13.99)
   const formattedVat=vat.toLocaleString();
   const grandTotal=totalPrice+shipping+vat
 

@@ -42,7 +42,7 @@ const Home = ({ data, handleButtonClick }) => {
         </div>
    
  
-        <div className="absolute z-0  -left-[30rem] md:-left-[34rem] md:mt-12  lg:left-0    ">
+        <div className="absolute z-0  md:-left-[34rem] md:mt-12  lg:left-0    ">
           <img
             srcSet="
   /resources/assets/home/mobile/image-header.jpg 640w,

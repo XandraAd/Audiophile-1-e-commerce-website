@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import CartSummaryItem from '../components/CartSummaryItem';
-import { formatPrice } from '../utils/helpers';
+
 import { useSelector } from 'react-redux';
 
 
 const CartSummary = () => {
   const {
     cartItems,
-    totalPrice, // Changed `total_price` to camelCase
+    totalPrice, 
     shipping,
     vat,
     grandTotal,

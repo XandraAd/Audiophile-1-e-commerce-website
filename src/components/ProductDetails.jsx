@@ -96,7 +96,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
 
   return (
     <>
-      <Box className="m-2 max-w-full ">
+      <Box className="m-2 max-w-full  lg:w-96  ">
         <Button className="capitalize p-2 shadow-sm">
           <GoBackBtn />
         </Button>
@@ -104,9 +104,9 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
         <Box
           mt={20}
           mb={{base:"20",lg:"0"}}
-          className="px-3 ml-4   relative  lg:grid lg:grid-cols-2 lg:h-[26rem] xl2:h-[588px] w-[92%]  lg:w-[65%] xl:w-[78%] xl:h-[32rem] xl2:w-[79%]  "
+          className="px-3 ml-4   relative  lg:grid lg:grid-cols-2 lg:h-[26rem] xl2:h-[588px] w-[92%]  lg:w-[65%] lg:-ml-20 xl:w-[80%] xl:h-[32rem] xl2:w-[70%] xl:ml-16 "
         >
-          <Box className="md:w-full lg:w-[700px]">
+          <Box className="md:w-full lg:w-[900px] xl:w-[800px] ">
             {/* Image Section */}
             <Stack flexDir={{ base: "column", md: "row" }}>
               <Center>
@@ -121,12 +121,12 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
          1200px"
                   src={categoryImage.desktop}
                   alt={name}
-                  className="h-[20rem] w-full object-cover bg-gray md:h-[15rem]  lg:order-2 order-1 lg:w-[700px] md:h-[25rem]  lg:relative lg:left-32 "
+                  className="h-[20rem] w-full object-cover bg-gray md:h-[15rem]  lg:order-2 order-1 lg:w-[700px] md:h-[25rem]  lg:relative lg:left-32  xl2:h-[35rem] xl2:w-[27rem] "
                 />
               </Center>
 
               {/* Text Section */}
-              <Box flex={{ base: "0"}} mr={{ base: "0", lg: "1" }} className="lg:relative lg:left-32">
+              <Box flex={{ base: "0"}} mr={{ base: "0", lg: "1" }} className="lg:relative lg:left-32 xl2:left-[20rem]">
                 <Center>
                   <Box flexDir={{ base: "column"}}>
                     <Stack flexDir={{ base: "column"}}>
@@ -194,7 +194,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           </Box>
 
           <Center>
-            <Box flexDir={{ base: "column" }} className="lg:relative lg:left-20 lg:top-[20rem]" >
+            <Box flexDir={{ base: "column" }} className="lg:relative lg:left-[36rem] lg:top-[20rem] xl:left-[27rem] xl2:left-[40rem]" >
               <Flex justify="center" alignItems="center">
                 <Box
                   mr="1rem"
@@ -229,7 +229,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                 </Box>
               </Flex>
 
-              <Box className=" md:w-[680px]  md:mb-8 md:-ml-2 lg:w-[780px]  lg:mb-12 lg:-ml-16 lg:mt-16" >
+              <Box className=" md:w-[680px]  md:mb-8 md:-ml-2 lg:w-[900px]  lg:mb-12 lg:-ml-72 lg:mt-20 xl:-ml-40 xl:mt-20 xl:w-[850px] xl2:-ml-[20rem] xl:w-[1050px] xl2:mt-64" >
                 <Text
                   as="b"
                  
@@ -254,7 +254,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                   {features}
                 </Text>
               </Box>
-              <Box marginTop={4} className="md:grid md:grid-cols-2  md:-ml-1 md:mb-12 lg:w-[780px]  lg:mb-20 lg:-ml-16 lg:mt-16">
+              <Box marginTop={4} className="md:grid md:grid-cols-2  md:-ml-1 md:mb-12 lg:w-[900px]  lg:mb-20 lg:-ml-72 lg:mt-16 xl:-ml-40 xl:w-[850px] xl2:-ml-[320px]">
                 <Text
                   style={{
                     fontFamily: "Manrope",
@@ -268,7 +268,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                 <ul>
                   {Array.isArray(includes) ? (
                     includes.map((item, id) => (
-                      <li key={id} className="md:ml-28">
+                      <li key={id} className="md:ml-28  lg:ml-56  xl:ml-32">
                         <p>
                           <span className="text-orange">{item.quantity}</span>
                           <span className="text-orange">x </span>
@@ -287,7 +287,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
             templateRows={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
             templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
             gap={4}
-            className="md:w-[740px] md:-ml-2 lg:w-[780px]  lg:mb-12 lg:ml-28 lg:mt-64 "
+            className="md:w-[740px] md:-ml-2 lg:w-[900px]  lg:mb-12 lg:ml-[8.5rem] lg:mt-72   xl:w-[900px] xl:ml-32 "
            
           >
             <Stack >
@@ -305,7 +305,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                1200px"
                   src={gallery?.desktop || categoryImage.desktop}
                   alt={`Gallery Image ${index + 1}`}
-                  className="mt-4 md:px-6 md:-ml-6 lg:w-[480px] lg:h-[16.2rem]"
+                  className="mt-4 md:px-6 md:-ml-6 lg:w-[460px] lg:h-[16.2rem]  xl2:px-0 xl2:ml-2"
                 />
               ))}
             </Stack>
@@ -324,23 +324,23 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                1200px"
                   src={gallery?.desktop || categoryImage.desktop} // Use desktop image by default
                   alt={`Gallery Image ${index + 3}`}
-                  className="mt-4  md:-ml-12  md:min-h-[26.5rem]  md:min-w-[15.5rem] lg:min-h-[34rem] "
+                  className="mt-4  md:-ml-12  md:min-h-[26.5rem]  md:min-w-[15.5rem] lg:min-h-[34rem] lg:w-[30rem]  xl2:ml-8"
                 />
               ))}
             </Stack>
           </Grid>
 
-          <Box  className="md:-mt-36  lg:mt-[63rem]  ">
+          <Box  className="md:-mt-36  lg:mt-[66rem]">
             <Center>
-              <Box className="lg:w-full lg:-ml-72">
-                <Text className="uppercase font-bold w-96  mt-32 mb-4  md:-mt-96 md:w-[450px] md:ml-[180px] text-[28px] tracking-[0.8px] lg:-mt-32  lg:w-[23rem] ">
+              <Box className="w-full lg:w-[900px] lg:ml-[650px]  xl2:ml-[950px]" >
+                <Text className="uppercase font-bold w-full  mt-32 mb-4  md:-mt-96 md:w-[450px] md:ml-[180px] text-[28px] tracking-[0.8px] lg:-mt-32  lg:w-[23rem] xl:w-[26rem]  ">
                 You may also like
               </Text></Box>
               
             </Center>
 
             <Box >
-              <Stack flexDir={{ base: "column", md: "row" }}  className="md:w-[710px] lg:w-[720px] ">
+              <Stack flexDir={{ base: "column", md: "row" }}  className="md:w-[710px] lg:w-[850px] lg:relative lg:left-10  xl:-ml-12 xl2:-ml-2 xl:w-[860px] xl2:w-[920px] ">
                 {others.map((item, index) => {
                   const { image, name ,slug} = item;
                   const { mobile, tablet, desktop } = image;
@@ -358,7 +358,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           1200px"
                         src={desktop || categoryImage.desktop}
                         alt={`others Image ${index + 1}`}
-                        className="mt-4 h-[180px] w-full object-contain bg-lightgray md:h-[250px] md:-mt-16 md:-ml-2 md:object-cover md:w-[300px] lg:w-[530px] lg:-ml-48"
+                        className="mt-4 h-[180px] w-full object-contain bg-lightgray md:h-[250px] md:-mt-16 md:-ml-2 md:object-cover md:w-[300px] lg:w-[473px]   "
                       />
                       <Text
                         as="b"
@@ -366,7 +366,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                         textTransform="uppercase"
                         fontSize="24px"
                         margin="auto"
-                       className="md:relative md:-left-6 lg:-left-48">
+                       className="md:relative md:-left-6 lg:-left-[.5rem]">
                         {name}
                       </Text>
                       <Box marginLeft={32}>
@@ -376,7 +376,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                             handleButtonClick(name, slug)
                           }
                         >
-                          <Button className="bg-orange py-2 px-2 text-white mb-[1rem] -ml-8   md:h-[3rem] md:-ml-28 lg:md:-ml-[18rem]">
+                          <Button className="bg-orange py-2 px-2 text-white mb-[1rem] -ml-8   md:h-[3rem] md:-ml-28 lg:-ml-[4rem]">
                             See Product
                           </Button>
                         </Link>
@@ -389,10 +389,10 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           </Box>
         </Box>
       </Box>
-      <Box className="md:-ml-6 lg:mt-[95rem]  lg:w-[30rem] lg:ml-8 ">
+      <Box className="md:-ml-6 lg:mt-[100rem]  lg:ml-5 xl:ml-0 ">
         <Products data={product} />
       </Box>
-      <Box className="">
+      <Box className="lg:-mt-32">
         <BestGear />
       </Box>
     </>

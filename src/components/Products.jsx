@@ -25,8 +25,8 @@ const Products = ({ data }) => {
           const categoryData = categoriesData?.find((item) => item.id === index + 1); 
 
           return (
-            <div key={index} className=" relative grid grid-columns-1 content-between justify-normal text-center md:mt-2  md:ml-6 lg:mb-[12rem] 2xl:relative 2xl:left-64">
-              <div className="md:w-96lg:w-80 xl:w-96">
+            <div key={index} className=" relative grid grid-columns-1 content-between justify-normal text-center  md:mt-2  md:ml-6 lg:mb-[12rem] 2xl:relative 2xl:left-64">
+              <div className="md:w-96lg:w-80 xl:w-96 last:mb-32">
                 <img
                   src={categoryData?.src}
                   alt="category image"

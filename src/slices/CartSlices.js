@@ -53,12 +53,7 @@ const cartSlice = createSlice({
     
     
 
-    // editCart: (state, action) => {
-    //   const { id, updatedItem } = action.payload;
-    //   state.cartItems = state.cartItems.map((cartItem) =>
-    //     cartItem.id === id ? updatedItem : cartItem
-    //   );
-    // },
+    
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
         (cartItem) => cartItem._id !== action.payload
