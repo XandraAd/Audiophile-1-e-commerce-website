@@ -177,7 +177,7 @@ const Checkout = () => {
   <Input
     name="zipCode"
     type="text"
-    id="zipCode" // Ensure this id matches the htmlFor attribute above
+    id="zipCode" 
     value={formData.zipCode}
     onChange={handleInputChange}
   />
@@ -230,7 +230,7 @@ const Checkout = () => {
                 Payment method
               </FormLabel>
               
-             <Box className="lg:relative lg:left-[20rem]">
+             <Box className="md:relative md:left-[20rem]">
              <RadioGroup
                 name="paymentMethod"
                 defaultValue="e-money"
@@ -241,15 +241,15 @@ const Checkout = () => {
                 onChange={handlePaymentMethodChange}
               >
                 <Stack spacing="24px">
-                  <Box className="border-2 border-orange py-4 px-2 w-[20rem] rounded-lg">  
+                  <Box className="border-2 border-orange py-4 px-2 w-[20rem] rounded-lg ">  
                   <Radio value="e-money" id="e-money" 
                    >
-                   <FormLabel htmlFor="e-money">e-money</FormLabel>
+                   <FormLabel htmlFor="e-money" >e-money</FormLabel>
                   </Radio>
                   </Box>
                   <Box className="border-2 border-orange py-4 px-2 w-[20rem] rounded-lg">  
                   <Radio value="cash" id="cash">
-                  <FormLabel htmlFor="cash">Cash on delivery</FormLabel>
+                  <FormLabel htmlFor="cash" >Cash on delivery</FormLabel>
                   </Radio>
                   </Box>
                 </Stack>
@@ -270,10 +270,10 @@ const Checkout = () => {
             
                      {/* Additional inputs for e-money payment */}
                      {(formData.paymentMethod === "e-money" || formData.paymentMethod === "cash") && (
-            <Box>
+            <Box className="md: flex md:gap-4 md:-mt-32" >
                {formData.paymentMethod === "e-money" && (
                 <>
-              <FormControl mb={2}>
+              <FormControl mb={2} >
                 <FormLabel htmlFor="eMoneyNumber" fontSize="sm" fontWeight="bold">
                   e-Money Number
                 </FormLabel>
@@ -283,6 +283,8 @@ const Checkout = () => {
                   id="eMoneyNumber"
                   value={formData.eMoneyNumber}
                   onChange={handleInputChange}
+               
+
                 />
               </FormControl>
               <FormControl mb={2}>
@@ -372,7 +374,7 @@ const Checkout = () => {
       {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ModalOverlay />
-        <ModalContent maxH="600px" maxW={{base:"90%",lg:"50%"}}>
+        <ModalContent maxH="700px" maxW={{base:"90%",lg:"50%"}}>
           <ModalHeader>
           <Image src='/resources/assets/checkout/icon-order-confirmation.svg' alt='payment success icon' />
           </ModalHeader>
@@ -383,28 +385,34 @@ const Checkout = () => {
             <Text fontWeight="bold" mb={8} className="text-[15px] leading-4 tracking-wider ">
              Your will receive an email confirmation shortly.
             </Text>
+            <Box className="md:flex md:bg-lightgray md:h-32 ">
             <SummaryCart product={selectedItem} quantity={selectedItem?.quantity}  className=""/>
             {/* You can customize the message further here */}
-            <Divider w="15rem" paddingInline='10' marginLeft={10}/>
+            <Divider w="15rem" paddingInline='10' marginLeft={10} className=" md:absolute md:top-[18rem] md:left-10 md:text-black"/>
             <Center>
             {getUniqueProducts(cartItems).length > 1 && (
-        <Text  mb={4} className="text-slate-400 text-[12px]">and {cartItems.length} other item(s)</Text>
+        <Text  mb={4} className="text-slate-400 text-[12px] md:absolute md:top-[18rem] md:left-32 ">and {cartItems.length} other item(s)</Text>
       )}
             </Center>
         
-            <Stack flexDir="column" justifyContent="space-evenly "   className="bg-black h-32 mt-10">
+            <Stack flexDir="column" justifyContent="space-evenly "   className="bg-black h-32  mt-10 md:absolute md:top-[9rem] md:left-[24rem]  md:w-72 lg:w-32 lg:left-[22.5rem] xl:w-64 xl2:left-[24rem] xl2:w-[19.5rem]">
         <Text className="ml-4 uppercase text-slate-400 text-[15px] text-slate-400 "> Grand Total</Text>
         <Text as="b" className="mr-6 text-white text-[18px] ml-4">
         ${grandTotal.toLocaleString()}{" "}
         </Text>
       </Stack>
+            </Box>
+           
 
           </ModalBody>
           <ModalFooter>
-            <Link to="/"> <Center  className="w-[20.7rem] ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider" >
+            <Box className="w-96 lg:w-[120rem]">
+            <Link to="/"> <Center  className=" ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider" >
                 Back to home
                 </Center>
                 </Link>
+            </Box>
+           
         
             
           </ModalFooter>
