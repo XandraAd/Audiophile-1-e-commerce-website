@@ -18,7 +18,7 @@ const Home = ({ data, handleButtonClick }) => {
   return (
     <>
    <div className="h-[600px] relative flex flex-col md:h-[600px] lg:flex-row justify-center items-center mb-0 md:mb-12 xl:h-[600px]  2xl:h-[1000px]">
-   <hr   className=" relative -top-[19rem] z-20 w-full md:w-[45rem] lg:w-[55rem]  xl2:w-[62rem] 2xl:w-[110rem] 2xl:-top-[31rem]"/>
+   <hr   className=" relative -top-[19rem] z-20 w-full md:w-[90%] lg:w-[55rem]  xl2:w-[62rem] 2xl:w-[110rem] 2xl:-top-[31rem]"/>
       
       <div className="absolute md:left-22  lg:left-2 xl:left-32 xl2:left-40  2xl:left-80 text-white z-20 flex flex-col items-center lg:items-start">
     <small className="w-[300px] mt-12 ml-6 text-[16px] font-thin tracking-widest  md:mt-40  md:ml-[10rem] md:w-[450px] md:tracking-[16px]  lg:ml-[4rem]  2xl:text-2xl text-lightgray ">
