@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
+  useNavigate,
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -19,6 +20,7 @@ function App() {
   const [error, setError] = useState();
   const [activeTab, setActiveTab] = useState("Home");
   const dispatch = useDispatch();
+  
 
   // Assuming cartItems are retrieved from Redux store
   const cartItems = useSelector((state) => state.cartItems);
@@ -45,6 +47,7 @@ function App() {
 
     // Check if product exists
     if (product) {
+      
       console.log(
         `Navigate to product details page for product with ID: ${product.id}`
       );
@@ -130,6 +133,7 @@ function App() {
                 handleButtonClick={handleButtonClick}
                 cartItems={cartItems}
                 dispatch={dispatch}
+                
               />
             </Layout>
           }

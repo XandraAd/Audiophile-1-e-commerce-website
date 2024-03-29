@@ -212,7 +212,7 @@ const NavBar = ({ data }) => {
          
         >
           <ModalOverlay />
-          <ModalContent  maxH="600px" maxW={{base:"90%",lg:"50%"}}>
+          <ModalContent  maxH="600px" maxW={{base:"90%",md:"50%" }} className="md:absolute md:left-40 md:-top-12">
             <ModalHeader>
               <Stack flexDir="row"className="flex
               justify-between">

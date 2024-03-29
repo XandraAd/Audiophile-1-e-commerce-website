@@ -45,13 +45,13 @@ const CartItem = ({ product}) => {
            <Stack  flexDir="row" key={product.id} className="w-[80%] mb-6 ">
       <img src={product?.image?.mobile} alt={product.name}  className="h-20 w-20"/>
       <Stack flexDir="row" className="">
-        <VStack> 
-          <Text as="b" className="w-32">{product.name}</Text>
-        <Text className="text-slate-400 -ml-12 ">${product.price.toLocaleString()}</Text> 
+        <VStack className="lg:w-64"> 
+          <Text as="b" className="w-32 md:text-lg md:-ml-16">{product.name}</Text>
+        <Text className="text-slate-400 -ml-12  md:ml-4 md:mr-40">${product.price.toLocaleString()}</Text> 
         </VStack>
         
         <Flex justify="center" alignItems="center">
-                <Box className="flex shadow-md px-2 py-4  bg-gray -mt-12 h-6 w-20 ml-10 bg-lightgray">
+                <Box className="flex shadow-md px-2 py-4  bg-gray -mt-12 h-6 w-20 ml-10 bg-lightgray md:-ml-12 lg:ml-10  xl:ml-40 xl2:ml-64">
                
                     <RxMinus onClick={handleDecrease}  className="w-32 flex self-center"/>
                   

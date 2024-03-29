@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import CartSummaryItem from '../components/CartSummaryItem';
+// import CartSummaryItem from './CartSummary';
+import IndividualCart from './IndividualCart';
 
 import { useSelector } from 'react-redux';
 
@@ -25,14 +26,14 @@ const CartSummary = () => {
   return (
     <div className="bg-white rounded-md p-4 flex flex-col gap-4 shadow-md">
       <h6 className="text-xl font-medium border-b pb-2">Summary</h6>
-      <ul className="flex flex-col gap-4">
+      <ul className="flex flex-col gap-4 md:-ml-10">
         {/* Render CartSummaryItem components here */}
         {cartItems.map((cartItem) => (
-          <CartSummaryItem key={cartItem.id} {...cartItem} />
+          <IndividualCart key={cartItem.id} {...cartItem} />
         ))}
       </ul>
-      <div className="flex flex-col gap-2">
-        <p className="text-gray-500 text-sm">
+      <div className="flex flex-col gap-2  ">
+        <p className="text-gray-500 text-sm ">
           Total: <span className="font-bold">{formatPrice(totalPrice)}</span>
         </p>
         <p className="text-gray-500 text-sm">

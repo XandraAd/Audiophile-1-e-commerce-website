@@ -26,7 +26,7 @@ import Products from "./Products";
 import BestGear from "./BestGear";
 import GoBackBtn from "./GoBackBtn";
 
-const ProductDetailsPage = ({ product, handleButtonClick }) => {
+const ProductDetailsPage = ({ product}) => {
   const [selected, setSelected] = useState(null);
   const { productName, slug, name } = useParams();
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
   useEffect(() => {
     // Reset count when component unmounts
     return () => {
+     
       dispatch(resetCartCount());
     };
   }, [dispatch]);
@@ -46,6 +47,8 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
       ? product?.find((p) => p.name === productName)
       : product?.find((p) => p.slug === slug);
     setSelected(selectedProduct);
+    console.log("productName:", productName);
+    console.log("slug:", slug);
     // console.log(`selected in details `, selectedProduct);
   }, [product, productName, slug]);
 
@@ -60,8 +63,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
     gallery,
     description,
     price,
-
-    categoryImage,
+categoryImage,
     features,
     includes,
   } = selected;
@@ -91,6 +93,13 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
       dispatch(addToCart({ item: selected, quantity, image: selected.image }));
     }
   };
+  
+  const handleSeeProduct = (productName,slug) => {
+    // Navigate to the product details page with the given slug
+    navigate(`/product/${productName}`);
+    //scroll to the top
+    window.scroll(0,0)
+  }
 
 
 
@@ -194,7 +203,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           </Box>
 
           <Center>
-            <Box flexDir={{ base: "column" }} className="lg:relative lg:left-[36rem] lg:top-[20rem] xl:left-[27rem] xl2:left-[40rem]" >
+            <Box flexDir={{ base: "column" }} className="md:relative md:left-[1rem] md:-top-[6rem] lg:left-[36rem] lg:top-[20rem] xl:left-[27rem] xl2:left-[40rem]" >
               <Flex justify="center" alignItems="center">
                 <Box
                   mr="1rem"
@@ -229,7 +238,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                 </Box>
               </Flex>
 
-              <Box className=" md:w-[680px]  md:mb-8 md:-ml-2 lg:w-[900px]  lg:mb-12 lg:-ml-72 lg:mt-20 xl:-ml-40 xl:mt-20 xl:w-[850px] xl2:-ml-[20rem] xl:w-[1050px] xl2:mt-64" >
+              <Box className=" md:w-[680px] md:mt-12   md:mb-8 md:-ml-2 lg:w-[950px]  lg:mb-12 lg:-ml-72 lg:mt-20 xl:-ml-40 xl:mt-20 xl:w-[850px] xl2:-ml-[20rem] xl:w-[1050px] xl2:mt-64  xl2:w-[1100px]" >
                 <Text
                   as="b"
                  
@@ -287,7 +296,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
             templateRows={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
             templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
             gap={4}
-            className="md:w-[740px] md:-ml-2 lg:w-[900px]  lg:mb-12 lg:ml-[8.5rem] lg:mt-72   xl:w-[900px] xl:ml-32 "
+            className="md:w-[740px] md:-ml-2 lg:w-[900px]  lg:mb-12 lg:ml-[8.5rem] lg:mt-72   xl:w-[990px] xl:ml-32 xl2:w-[1100px] "
            
           >
             <Stack >
@@ -324,7 +333,7 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                1200px"
                   src={gallery?.desktop || categoryImage.desktop} // Use desktop image by default
                   alt={`Gallery Image ${index + 3}`}
-                  className="mt-4  md:-ml-12  md:min-h-[26.5rem]  md:min-w-[15.5rem] lg:min-h-[34rem] lg:w-[30rem]  xl2:ml-8"
+                  className="mt-4  md:-ml-12  md:min-h-[26.5rem]  md:min-w-[15.5rem] lg:min-h-[34rem] lg:w-[30rem]  xl2:ml-8 xl2:w-[32rem]"
                 />
               ))}
             </Stack>
@@ -333,14 +342,14 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
           <Box  className="md:-mt-36  lg:mt-[66rem]">
             <Center>
               <Box className="w-full lg:w-[900px] lg:ml-[650px]  xl2:ml-[950px]" >
-                <Text className="uppercase font-bold w-full  mt-32 mb-4  md:-mt-96 md:w-[450px] md:ml-[180px] text-[28px] tracking-[0.8px] lg:-mt-32  lg:w-[23rem] xl:w-[26rem]  ">
+                <Text className="uppercase font-bold w-full  mt-32 mb-4  md:-mt-96 md:w-[450px] md:ml-[180px] md:-mt-28 md:mb-20 text-[28px] tracking-[0.8px] lg:-mt-32  lg:w-[23rem] xl:w-[20rem]  ">
                 You may also like
               </Text></Box>
               
             </Center>
 
             <Box >
-              <Stack flexDir={{ base: "column", md: "row" }}  className="md:w-[710px] lg:w-[850px] lg:relative lg:left-10  xl:-ml-12 xl2:-ml-2 xl:w-[860px] xl2:w-[920px] ">
+              <Stack flexDir={{ base: "column", md: "row" }}  className="md:w-[710px] lg:w-[850px] lg:relative lg:left-10  xl:-ml-12 xl2:-ml-2 xl:w-[950px] xl2:w-[920px] ">
                 {others.map((item, index) => {
                   const { image, name ,slug} = item;
                   const { mobile, tablet, desktop } = image;
@@ -366,17 +375,15 @@ const ProductDetailsPage = ({ product, handleButtonClick }) => {
                         textTransform="uppercase"
                         fontSize="24px"
                         margin="auto"
-                       className="md:relative md:-left-6 lg:-left-[.5rem]">
+                       className="md:relative md:-left-4 lg:-left-[.5rem]">
                         {name}
                       </Text>
                       <Box marginLeft={32}>
-                        <Link
-                          to={`/product/${slug}`}
-                          onClick={() =>
-                            handleButtonClick(name, slug)
-                          }
-                        >
-                          <Button className="bg-orange py-2 px-2 text-white mb-[1rem] -ml-8   md:h-[3rem] md:-ml-28 lg:-ml-[4rem]">
+                      <Link
+  to={`/product/${slug}`}
+  onClick={() =>handleSeeProduct()}
+>
+                          <Button className="bg-orange py-2 px-2 text-white mb-[1rem] -ml-8   md:h-[3rem] md:-ml-20 lg:-ml-[4rem]">
                             See Product
                           </Button>
                         </Link>

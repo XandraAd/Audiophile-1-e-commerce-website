@@ -25,7 +25,9 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import GoBackBtn from "../components/GoBackBtn";
-import SummaryCart from "../components/SummaryCart";
+import IndividualCart from "../components/IndividualCart";
+import CheckoutIndividualCart from "../components/CheckoutIndividualCart";
+
 
 
 const Checkout = () => {
@@ -43,7 +45,8 @@ const Checkout = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const cartItems = useSelector((state) => state.carts.cartItems);
-  const [selectedItem] = useState(cartItems[0]); // Selecting the first item in the cart
+  const [selectedItem] = useState(cartItems[0]);
+  // Selecting the first item in the cart
 
   const handleInputChange = (e) => {
     if (e && e.target) {
@@ -91,6 +94,10 @@ const Checkout = () => {
 
   const handlePaymentMethodChange = (value) => {
     setFormData({ ...formData, paymentMethod: value });
+  };
+
+  const resetCartItemCount=()=>{
+cartItems(0)
   };
 
   
@@ -230,14 +237,12 @@ const Checkout = () => {
                 Payment method
               </FormLabel>
               
-             <Box className="md:relative md:left-[20rem]">
+             <Box className="md:relative md:left-[20rem] xl:left-[30rem] xl2:left-[39rem]">
              <RadioGroup
                 name="paymentMethod"
                 defaultValue="e-money"
                 value={formData.paymentMethod}
-                // onChange={(value) =>
-                //   setFormData({ ...formData, paymentMethod: value })
-                // }
+                
                 onChange={handlePaymentMethodChange}
               >
                 <Stack spacing="24px">
@@ -325,12 +330,15 @@ const Checkout = () => {
      
       <Box>
         <Box className="mt-12">
-          <Text as="b" className="uppercase text-[18px]">summary</Text>
+          <Text as="b" className="uppercase text-[18px] md:mb-2">summary</Text>
           
             {cartItems?.length > 0 && (
               <>
                 {cartItems.map((item, id) => (
-                  <SummaryCart key={id} product={item} quantity={item.quantity} />
+                  <div key={id} className="md:w-full ">
+                     <CheckoutIndividualCart key={id} product={item} quantity={item.quantity}   />
+                  </div>
+                 
                 ))}
               
               </>
@@ -374,7 +382,7 @@ const Checkout = () => {
       {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ModalOverlay />
-        <ModalContent maxH="700px" maxW={{base:"90%",lg:"50%"}}>
+        <ModalContent maxH="700px" maxW={{base:"90%",md:"70%",lg:"50%"}}>
           <ModalHeader>
           <Image src='/resources/assets/checkout/icon-order-confirmation.svg' alt='payment success icon' />
           </ModalHeader>
@@ -385,17 +393,17 @@ const Checkout = () => {
             <Text fontWeight="bold" mb={8} className="text-[15px] leading-4 tracking-wider ">
              Your will receive an email confirmation shortly.
             </Text>
-            <Box className="md:flex md:bg-lightgray md:h-32 ">
-            <SummaryCart product={selectedItem} quantity={selectedItem?.quantity}  className=""/>
+            <Box className="md:flex md:bg-lightgray md:h-40 ">
+            <IndividualCart product={selectedItem} quantity={selectedItem?.quantity} />
             {/* You can customize the message further here */}
-            <Divider w="15rem" paddingInline='10' marginLeft={10} className=" md:absolute md:top-[18rem] md:left-10 md:text-black"/>
+            <Divider w="15rem" paddingInline='10' marginLeft={10} className=" md:absolute md:top-[18rem] md:left-10  lg:top-[19rem]"/>
             <Center>
             {getUniqueProducts(cartItems).length > 1 && (
-        <Text  mb={4} className="text-slate-400 text-[12px] md:absolute md:top-[18rem] md:left-32 ">and {cartItems.length} other item(s)</Text>
+        <Text  mb={4} className="text-slate-400 text-[12px] md:absolute md:top-[18rem] md:left-32  lg:top-[19.5rem]">and {cartItems.length-1} other item(s)</Text>
       )}
             </Center>
         
-            <Stack flexDir="column" justifyContent="space-evenly "   className="bg-black h-32  mt-10 md:absolute md:top-[9rem] md:left-[24rem]  md:w-72 lg:w-32 lg:left-[22.5rem] xl:w-64 xl2:left-[24rem] xl2:w-[19.5rem]">
+            <Stack flexDir="column" justifyContent="space-evenly "   className="bg-black h-32  mt-10 md:absolute md:top-[9.3rem] md:left-[18rem]  md:w-56  md:h-40 lg:w-40 lg:left-[20.5rem] xl:w-64 xl:left-[22.5rem] xl2:left-[24rem] xl2:w-[19.5rem]">
         <Text className="ml-4 uppercase text-slate-400 text-[15px] text-slate-400 "> Grand Total</Text>
         <Text as="b" className="mr-6 text-white text-[18px] ml-4">
         ${grandTotal.toLocaleString()}{" "}
@@ -406,8 +414,9 @@ const Checkout = () => {
 
           </ModalBody>
           <ModalFooter>
-            <Box className="w-96 lg:w-[120rem]">
-            <Link to="/"> <Center  className=" ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider" >
+            <Box className="w-96 md:w-[40rem]">
+            <Link to="/" onClick={resetCartItemCount}> 
+            <Center  className=" ring-2 ring-slate-300 py-2 bg-orange text-white uppercase  tracking-wider" >
                 Back to home
                 </Center>
                 </Link>
